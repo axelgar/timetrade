@@ -61,7 +61,7 @@ Ratings:
 - Services and users
 
 My trades:
-- Validate that the service was done (seller and buyer)
+- Validate that the service was done (consumer and provider)
 - See the services ratings
 - Receive a notification when a user books, accepts, rejects, confirm or cancels one of my services
 - cancel by consumer
