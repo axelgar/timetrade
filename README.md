@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+
+=======
 # Project Name
 Timetrade
 
@@ -222,3 +225,4 @@ The url to your repository and to your deployed project
 The url to your presentation slides
 
 [Slides Link](http://slides.com)
+>>>>>>> ad0ff5ad1bcb45be55d109e2e03a282a6e685e09
