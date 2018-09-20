@@ -14,7 +14,6 @@ Web app to trade services through time.
 - **login** - As a user I want to log in to the webpage so that I can get back to my profile and use all the web app functionalities 
 - **logout** - As a user I want to log out from the webpage so that I can make sure no one will access my profile 
 - **services list** - As a user I want to see all the services available so that I can choose which ones I want to receive
-- **services create** - As a user I want to create a service so that I can earn time to spend in other services
 - **services detail** - As a user I want to see the service details and decide if I want to book it 
 - **buy service** - As a user I want to hire a service so the owner can count on me
 - **my trades** - As a user I want to see my trades and the status so I can keep track, not forget about them. 
@@ -22,6 +21,7 @@ Web app to trade services through time.
 - **reject trades** - As a user I want to reject a booked service or delete a trade
 - **user profile** - As a user I want to see my profile so I can see my offered services 
 - **other users profiles** - As a user I want to see other users profiles so I can see their offered services 
+- **services create** - As a user I want to create a service so that I can earn time to spend in other services
 
 
 ## Backlog
