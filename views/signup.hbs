@@ -1,0 +1,22 @@
+<h1>Sign-Up</h1>
+<form method="POST" action="/auth/signup">
+  <div class="field" >
+    <label>Username</label>
+    <input type="text" name="username" value="{{fields.username}}"/>
+  </div>
+
+  <div class="field" >
+    <label>Password: </label>
+    <input type="password" name="password"/>
+  </div>
+    {{#if message1}}
+      <p class="validation">{{message1}}</p>
+    {{/if}}
+    {{#if message2}}
+      <p class="validation">{{message2}}</p>
+    {{/if}}
+  <div class="field submit">
+    <button type="submit">Submit</button>
+  </div>
+    <a href="/auth/login">I already have an account</a>
+</form>
