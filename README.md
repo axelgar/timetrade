@@ -65,6 +65,7 @@ My trades:
 - See the services ratings
 - Receive a notification when a user books, accepts, rejects, confirm or cancels one of my services
 - cancel by consumer
+- see previous completed services
 
 Usability:
 - Swipe
@@ -152,16 +153,19 @@ Usability:
   - update status
   - redirect to /trades
   
-  
-  
-  
-  
+- POST /trades/:id/reject
+  - redirects to / if user is anonymous
+  - next to 404 if :id is not valid, or trade doesn't exist or trade !== booked or !== accepted
+  - body: (empty)
+  - update status
+  - redirect to /trades
+    
 - POST /trades/:id/confirm
   - redirects to / if user is anonymous
   - next to 404 if :id is not valid, or trade doesn't exist or user !== the consumer or trade !== accpeted
   - body: (empty)
   - update status
-  - updated coins of consumer 
+  - update coins of consumer 
   - update coins of provider 
   - redirect to /trades
  
