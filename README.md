@@ -18,8 +18,8 @@ Web app to trade services through time.
 - **services detail** - As a user I want to see the service details and decide if I want to book it 
 - **buy service** - As a user I want to hire a service so the owner can count on me
 - **my trades** - As a user I want to see my trades and the status so I can keep track, not forget about them. 
-- **validate my trades** - As a user I want to accept a booked service and confirm when a service was done 
-- **reject my trades** - As a user I want to reject a booked service or delete a trade
+- **validate trades** - As a user I want to accept a booked service or confirm when a service was done 
+- **reject trades** - As a user I want to reject a booked service or delete a trade
 - **user profile** - As a user I want to see my profile so I can see my offered services 
 - **other users profiles** - As a user I want to see other users profiles so I can see their offered services 
 
@@ -39,12 +39,14 @@ Services create:
 Services list:
 - Search bar
 - Filter by category, geolocation or rate
+- See top rated services
 
 Sign Up:
 - Image upload
 
 Profile user:
 - Edit profile
+- Image upload
 
 Rate:
 - Services and users
@@ -52,6 +54,8 @@ Rate:
 My trades:
 - Validate that the service was done (seller and buyer)
 - See the services rates
+- See the coins of each service
+- Receive a message when a user books one of my services
 
 Usability:
 - Swipe
@@ -68,7 +72,7 @@ Usability:
 
 - POST /auth/signup
   - redirects to / if user logged in
-  - validate unique email
+  - validate unique email and required content
   - body:
     - username
     - email
@@ -83,6 +87,7 @@ Usability:
 
 - POST /auth/login
   - redirects to / if user logged in
+  - validate username and password
   - body:
     - username
     - password
@@ -108,27 +113,39 @@ Usability:
     - category
 
 - GET /services/:id
+  - next to 404 if services:id is not valid
   - renders the service detail page
   - includes the link to the buyer
   - button to hire the service
 
-- POST /services/:id/hired 
+- POST /services/:id/booked 
+  - next to 404 if services:id is not valid
   - redirects to / if user is anonymous
-  - body: (empty - the user is already stored in the session)
+  - body:
+    - owner
+    - service
+    - buyer
+    - state
+   - redirect to /trades
 
 - GET /user/:id
+ - next to 404 if user:id is not valid
  - redirects to / if user is anonymous
  - renders user profile
  - includes user offered services
 
 - GET /user/:id/trades
+ - next to 404 if user:id is not valid
  - redirects to / if user is anonymous
- - renders my trades page
+ - renders trades page
  - buttons to confirm or delete the service
 
-- POST /user/trades/:id/status
+- POST /user/:id/trades/:id/status
+ - next to 404 if user:id or trade:id is not valid
  - redirects to / if user is anonymous
- - body: updated status
+ - update status
+ - update coins
+ - redirect to /trades
  
 
 ## Models
@@ -138,8 +155,8 @@ User model
 ```
 username: String, required
 email: String, required
-contact: String, required
-about me: String, required
+contact: String (required - backlog)
+about me: String
 password: String, required
 coins: Number, default: 60
 
@@ -159,7 +176,7 @@ Trade model
 ``` 
 owner: ?????
 service: ObjectId<Service> 
-buyer: ObjectId<User>
+buyer: currentUserId
 state: enum [default: pending, imminent, complete, rejected]
 cost: enum [15, 30, 45, 60]
 ``` 
