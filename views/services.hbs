@@ -1,0 +1,12 @@
+<section class="services">
+  <h2>Services</h2>
+  <ul class="card-container">
+    {{#each services}}
+      <li class="card">
+        <h3 class="name">{{this.name}}</h3>
+        <p class="time">{{this.time}}</p>
+        <p class="owner">{{this.owner}}</p>
+      </li>
+    {{/each}}
+  </ul>
+</section>
