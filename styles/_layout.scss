@@ -1,5 +1,5 @@
 html { 
-  background: url("/images/background1.jpeg") no-repeat center center fixed; 
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.4) 100%), url("/images/background1.jpeg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -26,6 +26,7 @@ html {
 
 #site-main {
   margin-bottom: 60px;
+  text-align: center;
 }
 
 .container {

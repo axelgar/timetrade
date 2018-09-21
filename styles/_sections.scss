@@ -1,8 +1,24 @@
+
+.error {
+  text-align: center;
+  padding-top: 80px;
+}
+
 /* index */
 .index {
   text-align: center;
   a {
     display: block;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  .card {
+    img{
+      width: 50%;
+      border-radius: 60%;
+    }
   }
 }
 /* nav-bar*/
