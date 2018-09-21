@@ -1,0 +1,28 @@
+/* index */
+.index {
+  text-align: center;
+  a {
+    display: block;
+  }
+}
+/* nav-bar*/
+.nav {
+  display: flex;
+  justify-content: space-between;
+  .logo{
+    flex: 1;
+    .image{
+      width: 50px;
+    }
+  }
+  .links {
+    display: flex;
+    flex: 1;
+    justify-content: space-evenly;
+    margin: auto;
+    .link{
+      color: grayscale($color: #cfcfcf);
+      font-size: 16px;
+    }
+  }
+}

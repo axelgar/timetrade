@@ -8,10 +8,17 @@
   </head>
   <body>
     <header id="site-header">
-      <nav>
-        <a href="/auth/login" >Login</a>
-        <a href="/auth/signup" >Signup</a>
-        <a href="/auth/logout" >Logout</a>
+      <nav class="nav container">
+        <div class="logo">
+          <a href="/"><img src="../images/logo.png" class="image" alt="logo"></a>
+        </div>
+        <div class="links">
+          <a href="/auth/login" class="link">Login</a>
+          <a href="/auth/signup" class="link">Signup</a>
+          <form method="POST" action="/auth/logout">
+            <button class="logout link" type="submit">Logout</button>
+          </form>
+        </div>
       </nav>
     </header> 
     <main id="site-main" class="container">
