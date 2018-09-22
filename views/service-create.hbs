@@ -1,0 +1,39 @@
+<h1>Create service</h1>
+<form method="POST" action="/services/create">
+  <div class="field" >
+    <label>Name</label>
+    <input type="text" name="name" value="{{fields.name}}"/>
+  </div>
+
+  <div class="field" >
+    <label>Description</label>
+    <textarea name="description"></textarea>
+  </div>
+  <div class="field" >
+    <label>Category</label>
+    <select id="category">
+      <option value="">--Please choose an option--</option>
+      <option value="languages">Languages</option>
+      <option value="technology">Technology</option>
+      <option value="arts">Arts</option>
+      <option value="social">Social</option>
+      <option value="sports">Sports</option>
+    </select>
+  </div>
+  <div class="field" >
+    <label>Time</label>
+     <select id="time">
+      <option value="">--Please choose an option--</option>
+      <option value="60">60'</option>
+      <option value="45">45'</option>
+      <option value="30">30'</option>
+      <option value="15">15'</option>
+    </select>
+  </div>
+    {{#if message}}
+      <p class="validation">{{message}}</p>
+    {{/if}}
+  <div class="field submit">
+    <button type="submit" class="button">Create</button>
+  </div>
+</form>
