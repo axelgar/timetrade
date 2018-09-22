@@ -13,6 +13,7 @@ const MongoStore = require('connect-mongo')(session);
 // routes
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const servicesRouter = require('./routes/services');
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use(flash());
 // Routes
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/services', servicesRouter);
 
 // Errors
 app.use((req, res, next) => {

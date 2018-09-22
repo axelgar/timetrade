@@ -1,12 +1,15 @@
 <section class="services">
   <h2>Services</h2>
-  <ul class="card-container">
+  <ul>
     {{#each services}}
+    <div class="card-container" >
       <li class="card">
         <h3 class="name">{{this.name}}</h3>
+        <p class="category">{{this.category}}</p>
         <p class="time">{{this.time}}</p>
         <p class="owner">{{this.owner}}</p>
       </li>
+    </div>
     {{/each}}
   </ul>
 </section>

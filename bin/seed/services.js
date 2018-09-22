@@ -15,7 +15,7 @@ const options = {
 mongoose.connect(process.env.MONGODB_URI, options)
   .then(() => {
     console.log('Connected to Mongo!');
-    return Service.remove({});
+    return Service.deleteMany({});
   })
   .then(() => {
     console.log('Empty db');

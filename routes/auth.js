@@ -73,7 +73,7 @@ router.post('/login', (req, res, next) => {
   User.findOne({ username })
     .then(result => {
       if (!result) {
-        req.flash('usernamelogin-form-error', 'Incorrect pasword or username');
+        req.flash('usernamelogin-form-error', 'Incorrect password or username');
         req.flash('login-form-data', { username });
         return res.redirect('/auth/login');
       }

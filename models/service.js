@@ -6,15 +6,15 @@ const ObjectId = Schema.Types.ObjectId;
 
 const serviceSchema = new Schema({
   owner: {
-    type: ObjectId,
-    ref: 'User'
+    type: String,
+    required: true
   },
   name: {
     type: String,
     required: true
   },
   description: {
-    type: Number,
+    type: String,
     required: true
   },
   time: {

@@ -1,6 +1,6 @@
 'use strict';
 
-const users = [{
+const services = [{
   owner: 'Caroline',
   name: 'Portuguese class',
   description: 'Private class with a native professional teacher',
@@ -26,4 +26,4 @@ const users = [{
   category: 'sports'
 }];
 
-module.exports = users;
+module.exports = services;
