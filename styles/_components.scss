@@ -1,10 +1,11 @@
 .button {
   width: 140px;
-  background-color: #b15a17;
+  background-color:rgba($color: #ceccca, $alpha: 0.2);
   color: #fff;
   padding: 10px 15px;
   border-radius: 10px;
   font-size: 16px;
+  border: rgb(199, 199, 199) 2px solid;
 }
 
 .card-container{
@@ -14,6 +15,7 @@
   border-radius: 10px;
   width: 85%;
   text-align: center;
+  padding-bottom: 20px;
   p{
     text-align: justify;
     margin: 0 10px;

@@ -1,33 +1,33 @@
 <h1>Create service</h1>
-<form method="POST" action="/services/create">
+<form method="POST" action="/services/create" class="card-container services-create">
   <div class="field" >
-    <label>Name</label>
+    <h4>Name</h4>
     <input type="text" name="name" value="{{fields.name}}"/>
   </div>
 
   <div class="field" >
-    <label>Description</label>
-    <textarea name="description"></textarea>
+    <h4>Description</h4>
+    <textarea name="description" value="{{fields.description}}"></textarea>
   </div>
   <div class="field" >
     <label>Category</label>
-    <select id="category">
+    <select name="category">
       <option value="">--Please choose an option--</option>
-      <option value="languages">Languages</option>
-      <option value="technology">Technology</option>
-      <option value="arts">Arts</option>
-      <option value="social">Social</option>
-      <option value="sports">Sports</option>
+      <option value="languages" value="{{fields.category}}">Languages</option>
+      <option value="technology" value="{{fields.category}}">Technology</option>
+      <option value="arts" value="{{fields.category}}">Arts</option>
+      <option value="social" value="{{fields.category}}">Social</option>
+      <option value="sports" value="{{fields.category}}">Sports</option>
     </select>
   </div>
   <div class="field" >
     <label>Time</label>
-     <select id="time">
+     <select name="time">
       <option value="">--Please choose an option--</option>
-      <option value="60">60'</option>
-      <option value="45">45'</option>
-      <option value="30">30'</option>
-      <option value="15">15'</option>
+      <option value="60" value="{{fields.time}}">60'</option>
+      <option value="45" value="{{fields.time}}">45'</option>
+      <option value="30" value="{{fields.time}}">30'</option>
+      <option value="15" value="{{fields.time}}">15'</option>
     </select>
   </div>
     {{#if message}}

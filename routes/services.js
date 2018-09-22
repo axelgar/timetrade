@@ -17,6 +17,9 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/create', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
   const formData = req.flash('service-form-data');
   const formErrors = req.flash('service-form-error');
   const data = {
@@ -27,15 +30,17 @@ router.get('/create', (req, res, next) => {
 });
 
 router.post('/create', (req, res, next) => {
-  const { name, description, time, category } = req.body;
-
-  if (!name || !description || !time || !category) {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  const { name, description, category, time } = req.body;
+  if (!name || !description || !category || !time) {
     req.flash('service-form-error', 'all fields are mandatory');
-    req.flash('service-form-data', { name, description, time, category });
+    req.flash('service-form-data', { name, description, category, time });
     return res.redirect('/services/create');
   }
-
-  const service = new Service({ name, description, time, category });
+  const owner = req.session.currentUser;
+  const service = new Service({ owner, name, description, category, time });
   service.save()
     .then(() => {
       res.redirect('/services');
