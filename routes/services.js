@@ -14,7 +14,18 @@ router.get('/', (req, res, next) => {
       res.render('services', data);
     })
     .catch(next);
-})
-;
+});
+
+router.get('/:serviceId', (req, res, next) => {
+  const id = req.params.serviceId;
+  Service.findById(id)
+    .then((results) => {
+      const data = {
+        service: results
+      };
+      res.render('service-details', data);
+    })
+    .catch(next);
+});
 
 module.exports = router;
