@@ -8,10 +8,19 @@
 }
 
 .card-container{
-  background-color: rgba($color: #ceccca, $alpha: 0.7);
+  background-color: rgba($color: #ceccca, $alpha: 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin: 0px auto 20px auto;
-  padding-top: 10px;
   border-radius: 10px;
-  width: 70%;
+  width: 85%;
   text-align: center;
+  p{
+    text-align: justify;
+    margin: 0 10px;
+    padding-bottom: 10px;
+  }
+  .username, .category, .time{
+    text-align: center;
+    padding-bottom: 10px;
+  }
 }

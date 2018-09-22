@@ -19,6 +19,7 @@ router.get('/', (req, res, next) => {
 router.get('/:serviceId', (req, res, next) => {
   const id = req.params.serviceId;
   Service.findById(id)
+    .populate('owner')
     .then((results) => {
       const data = {
         service: results
