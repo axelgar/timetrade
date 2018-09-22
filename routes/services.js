@@ -6,6 +6,7 @@ const Service = require('../models/service');
 
 router.get('/', (req, res, next) => {
   Service.find({})
+    .populate('owner')
     .then((results) => {
       const data = {
         services: results

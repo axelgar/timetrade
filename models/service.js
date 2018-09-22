@@ -5,10 +5,10 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const serviceSchema = new Schema({
-  owner: {
-    type: String,
-    required: true
-  },
+  owner: [{
+    type: ObjectId,
+    ref: 'User'
+  }],
   name: {
     type: String,
     required: true
