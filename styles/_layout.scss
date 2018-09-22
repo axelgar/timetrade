@@ -6,10 +6,17 @@ html {
   background-size: cover;
 }
 
+body {
+  padding-top: 70px;
+}
+
 #site-header {
   padding: 5px 0;
   color: white;
-  background-color: #1E252A;
+  background-color:rgba($color:  #1E252A, $alpha: 0.7);
+  position: fixed;
+  width: 100%;
+  top: 0;
 }
 
 #site-footer {
