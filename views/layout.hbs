@@ -15,11 +15,15 @@
         </div>
         <div class="links">
           <a href="/services" class="link">Services</a>
+          {{#unless currentUser}}
           <a href="/auth/login" class="link">Login</a>
           <a href="/auth/signup" class="link">Signup</a>
+          {{/unless}}
+          {{#if currentUser}}
           <form method="POST" action="/auth/logout">
             <button class="logout link" type="submit">Logout</button>
           </form>
+          {{/if}}
         </div>
       </nav>
     </header> 

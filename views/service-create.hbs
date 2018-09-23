@@ -1,5 +1,6 @@
 <h1>Create service</h1>
-<form method="POST" action="/services/create" class="card-container services-create">
+<form method="POST" action="/services/create" class="services-create">
+<div class="card-container">
   <div class="field" >
     <h4>Name</h4>
     <input type="text" name="name" value="{{fields.name}}"/>
@@ -33,6 +34,7 @@
     {{#if message}}
       <p class="validation">{{message}}</p>
     {{/if}}
+  </div>
   <div class="field submit">
     <button type="submit" class="button">Create</button>
   </div>

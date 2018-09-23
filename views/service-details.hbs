@@ -11,4 +11,11 @@
   <p class="category">{{service.category}}</p>
   <p class="time">{{service.time}}</p>
   </div>
+  {{#if currentUser}}
+    <form action="/trades/{{service.id}}/create" method="post" >
+      <div class="field submit">
+        <button class="button">Book</button>
+      </div>
+    </form>
+  {{/if}}
 </section>
