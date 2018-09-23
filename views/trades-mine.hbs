@@ -1,0 +1,19 @@
+<section class="trades">
+  <h2>My Trades</h2>
+  <ul>
+    {{#each trades}}
+      <div class="card-container" >
+        <li class="card">
+          <h3 class="name">{{this.service.name}}</h3>
+          <h3 class="name">{{this.consumer}}</h3>
+          <p class="category">{{this.service.category}}</p>
+          <p class="time">{{this.service.time}}</p>
+          {{#each owner}}
+            <p class="owner">{{this.username}}</p>
+          {{/each}}
+          <p class="state">{{this.state}}</p>
+        </li>
+      </div>
+    {{/each}}
+  </ul>
+</section>

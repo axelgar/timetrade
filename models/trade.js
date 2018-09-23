@@ -5,10 +5,6 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const tradeSchema = new Schema({
-  provider: [{
-    type: ObjectId,
-    ref: 'Service.owner'
-  }],
   service: {
     type: ObjectId,
     ref: 'Service'

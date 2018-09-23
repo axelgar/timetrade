@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const Service = require('../models/service');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', (req, res, next) => {
   Service.find({})
@@ -50,6 +51,9 @@ router.post('/create', (req, res, next) => {
 
 router.get('/:serviceId', (req, res, next) => {
   const id = req.params.serviceId;
+  if (!ObjectId.isValid(id)) {
+    return res.redirect('/services');
+  }
   Service.findById(id)
     .populate('owner')
     .then((results) => {

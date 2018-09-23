@@ -9,21 +9,27 @@
   </head>
   <body>
     <header id="site-header">
-      <nav class="nav container">
-        <div class="logo">
+      <nav role="navigation">
+        {{!-- <div class="logo">
           <a href="/"><img src="../images/logo.png" class="image" alt="logo"></a>
-        </div>
-        <div class="links">
-          <a href="/services" class="link">Services</a>
-          {{#unless currentUser}}
-          <a href="/auth/login" class="link">Login</a>
-          <a href="/auth/signup" class="link">Signup</a>
-          {{/unless}}
-          {{#if currentUser}}
-          <form method="POST" action="/auth/logout">
-            <button class="logout link" type="submit">Logout</button>
-          </form>
-          {{/if}}
+        </div> --}}
+        <div id="menuToggle">
+          <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+          <ul id="menu">
+            <a href="/services"><li>Services</li></a>
+            {{#unless currentUser}}
+            <a href="/auth/login" ><li>Login</li></a>
+            <a href="/auth/signup"><li>Signup</li></a>
+            {{/unless}}
+            {{#if currentUser}}
+            <form method="POST" action="/auth/logout">
+              <button class="logout link" type="submit"><li>Logout</li></button>
+            </form>
+            {{/if}}
+          </ul>
         </div>
       </nav>
     </header> 
