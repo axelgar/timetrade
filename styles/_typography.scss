@@ -5,12 +5,25 @@ body {
   font-family: 'Varela Round', sans-serif;
 }
 
-h1 {}
-
-h2 {}
-
-h3 {}
+.index h1 {
+  font-size: 70px;
+}
 
 p {
   margin: 0;
+}
+
+input {
+  font-family: 'Varela Round', sans-serif;
+}
+
+select{
+  font-family: 'Varela Round', sans-serif;
+  font-size: 18px;
+  text-align: center
+}
+
+textarea {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 15px;
 }

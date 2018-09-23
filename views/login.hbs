@@ -1,21 +1,25 @@
-<h1>Log-in</h1>
-<form method="POST" action="/auth/login">
-  <div class="field" >
+<section class="form">
+  <h1>Log-in</h1>
+  <form method="POST" action="/auth/login">
     <label>Username</label>
-    <input type="text" name="username" value="{{fields.username}}"/>
-  </div>
-  <div class="field" >
-    <label>Password: </label>
-    <input type="password" name="password"/>
-  </div>
-    {{#if message1}}
-      <p class="validation">{{message1}}</p>
-    {{/if}}
-    {{#if message2}}
-      <p class="validation">{{message2}}</p>
-    {{/if}}
-  <div class="field submit">
-    <button type="submit" class="button">Submit</button>
-  </div>
-  <a href="/auth/signup">Or sign up</a>
-</form>
+    <div class="card-input">
+      <img src="/images/user.png">
+      <input type="text" name="username" value="{{fields.username}}" placeholder="Username"/>
+    </div>
+      <label>Password</label>
+      <div class="card-input"> 
+        <img src="/images/key.png">
+        <input type="password" name="password" placeholder="Password"/>
+      </div>
+      {{#if message1}}
+        <p class="validation">{{message1}}</p>
+      {{/if}}
+      {{#if message2}}
+        <p class="validation">{{message2}}</p>
+      {{/if}}
+    <div class="submit">
+      <button type="submit" class="button">Get ready!</button>
+    </div>
+    <a href="/auth/signup">Or sign up</a>
+  </form>
+</section>

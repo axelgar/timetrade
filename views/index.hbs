@@ -2,7 +2,7 @@
   <h1>{{title}}</h1>
   <h2>Trade your time</h2>
   <section class="about"> 
-    <h3>About</h3>
+    <h3>About:</h3>
     <p>Time Trade is a webapp that helps people to interchange service without money but time</p>
   </section>
   <section class="comments">
@@ -10,14 +10,16 @@
     <div class="card">
       <img src="..//images/Photoprofile.png" alt="Profile picture">
       <p>
-        Comentario comentario
+        "With this app I've learn to program Ajax giving yoga"
       </p>
     </div>
   </section>
+  {{#unless currentUser}}
   <div class="buttons">
     <a href="/auth/signup" class="button">Sign up</a>
     <a href="/auth/login" class="button">Login</a>
   </div>
+  {{/unless}}
 </div>
 
 

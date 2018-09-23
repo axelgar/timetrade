@@ -1,13 +1,14 @@
+<section class="form create">
 <h1>Create service</h1>
 <form method="POST" action="/services/create" class="services-create">
 <div class="card-container">
   <div class="field" >
-    <h4>Name</h4>
-    <input type="text" name="name" value="{{fields.name}}"/>
+    <label>Name</label>
+    <input type="text" name="name" value="{{fields.name}}"/ placeholder="Name of the service">
   </div>
 
   <div class="field" >
-    <h4>Description</h4>
+    <label>Description</label>
     <textarea name="description" value="{{fields.description}}"></textarea>
   </div>
   <div class="field" >
@@ -36,6 +37,7 @@
     {{/if}}
   </div>
   <div class="field submit">
-    <button type="submit" class="button">Create</button>
+    <button type="submit" class="button">Add</button>
   </div>
 </form>
+</section>

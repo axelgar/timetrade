@@ -24,8 +24,10 @@ button {
   padding: 0;
   width: auto;
   overflow: visible;
-
   background: transparent;
+}
+button:focus {
+  outline: 0;
 }
 li,ul {
   list-style: none;

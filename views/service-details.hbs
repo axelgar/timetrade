@@ -11,6 +11,9 @@
   <p class="category">{{service.category}}</p>
   <p class="time">{{service.time}}</p>
   </div>
+  {{#unless currentUser}}
+  <p>Log-in to book service</p>
+  {{/unless}}
   {{#if currentUser}}
     <form action="/trades/{{service.id}}/create" method="post" >
       <div class="field submit">
