@@ -4,8 +4,16 @@
   padding-top: 80px;
 }
 
+#menu {
+  p {
+    color: rgb(224, 56, 240);
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+}
 /* index */
 .index {
+  padding-top: 30px;
   text-align: center;
   a {
     display: block;
@@ -15,31 +23,89 @@
     justify-content: space-around;
   }
   .card {
-    img{
+    img {
       width: 50%;
       border-radius: 60%;
     }
   }
 }
 /* nav-bar*/
-.nav {
-  display: flex;
-  justify-content: space-between;
-  .logo{
-    flex: 1;
-    .image{
-      width: 50px;
-    }
+#site-header {
+  .image{
+    position: absolute;
+    width: 40px;
+    left: 70%;
   }
-  .links {
+}
+
+.services {
+  img {
+    width: 100%;
+    border-radius: 10px;
+  }
+}
+
+.services-create {
+  h4 {
+    text-align: left;
+    margin: 0 10px;
+  }
+}
+
+
+#site-footer {
+  ul {
     display: flex;
-    flex: 1;
-    justify-content: space-evenly;
-    margin: auto;
-    .link{
-      color: grayscale($color: #cfcfcf);
-      font-size: 16px;
-      margin-right: 5px;
+    justify-content: left;
+    li {
+      text-align: center;
+      font-size: 12px;
+      flex: 1;
     }
   }
+}
+
+.form {
+  h1 {
+    font-size: 40px;
+    padding-bottom: 40px;
+  }
+  img {
+    width: 30px;
+  }
+  input {
+    font-size: 23px;
+    background: transparent;
+    border: 0;
+    text-align: center;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: 0;
+
+  }
+  button {
+    margin-top: 20px;
+  }
+  label {
+    display: block;
+    font-size: 20px;
+    padding-top: 5px;
+    text-align: left;
+  }
+}
+
+.create {
+  label {
+    padding: 20px 0 0 20px;
+  }
+  textarea {
+    border-radius: 5px;
+    border-color: transparent;
+    height: 100px;
+    width: 80%;
+  }
+}
+
+.validation {
+  color: rgb(176, 55, 34);
 }

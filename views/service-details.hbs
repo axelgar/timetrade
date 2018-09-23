@@ -1,10 +1,24 @@
 <section class="section services">
-  <h2><span class="name">{{service.name}}</span></h2>
-  <div class="nav">
-    <a href="/services">All services</a>
+  <div class="card-container">
+  <div class="image">
+    <img src="/images/services.jpg">
   </div>
-  <p>{{service.category}}</p>
-  <p>{{service.time}}</p>
+  <h2><span class="name">{{service.name}}</span></h2>
+  {{#each service.owner}}
+    <p class="username">{{this.username}}</p>
+  {{/each}}  
   <p>{{service.description}}</p>
-  <p>{{service.owner}}</p>  
+  <p class="category">{{service.category}}</p>
+  <p class="time">{{service.time}}</p>
+  </div>
+  {{#unless currentUser}}
+  <p>Log-in to book service</p>
+  {{/unless}}
+  {{#if currentUser}}
+    <form action="/trades/{{service.id}}/create" method="post" >
+      <div class="field submit">
+        <button class="button">Book</button>
+      </div>
+    </form>
+  {{/if}}
 </section>

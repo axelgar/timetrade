@@ -4,27 +4,47 @@
     <title>{{title}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel='stylesheet' href='/stylesheet/style.css' />
+    <link rel='stylesheet' href='/stylesheet/style.css'/>
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
   </head>
   <body>
     <header id="site-header">
-      <nav class="nav container">
-        <div class="logo">
-          <a href="/"><img src="../images/logo.png" class="image" alt="logo"></a>
-        </div>
-        <div class="links">
-          <a href="/services" class="link">Services</a>
-          <a href="/auth/login" class="link">Login</a>
-          <a href="/auth/signup" class="link">Signup</a>
-          <form method="POST" action="/auth/logout">
-            <button class="logout link" type="submit">Logout</button>
-          </form>
+      <nav role="navigation">
+        <div id="menuToggle">
+          <a href="/"><img src="../images/logo2.png" class="image" alt="logo"></a>
+          <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+          <ul id="menu">
+            {{#if currentUser}}
+            <p>Hello {{currentUser.username}}!</p>
+            {{/if}}
+            <a href="/"><li>Home</li></a>
+            <a href="/services"><li>Services</li></a>
+            {{#unless currentUser}}
+            <a href="/auth/login" ><li>Login</li></a>
+            <a href="/auth/signup"><li>Signup</li></a>
+            {{/unless}}
+            {{#if currentUser}}
+            <a href="/services/create"><li>Add service</li></a>
+            <form method="POST" action="/auth/logout">
+              <button class="logout link" type="submit"><li>Logout</li></button>
+            </form>
+            {{/if}}
+          </ul>
         </div>
       </nav>
     </header> 
     <main id="site-main" class="container">
     {{{body}}}
     </main>
-    <footer id="site-footer">Nice footer</footer>
+    <footer id="site-footer">
+      <ul class="container">
+        <li>About</li>
+        <li>Contact</li>
+        <li>Terms&Condicitons</li>
+      </ul>
+    </footer>
   </body>
 </html>

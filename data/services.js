@@ -3,7 +3,7 @@
 const services = [{
   owner: ['Caroline'],
   name: 'Portuguese class',
-  description: 'Private class with a native professional teacher',
+  description: 'I offer lessons prepared specially for you, according to your needs! I can help you to communicate, to write and to read in portuguese, so that you can have a complete experience in Brazil.',
   time: 60,
   category: 'languages'
 }, {
