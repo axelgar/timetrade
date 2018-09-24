@@ -1,19 +1,21 @@
 <section class="trades">
-  <h2>My Trades</h2>
+  <h2>Booked trades</h2>
   <ul>
     {{#each trades}}
       <div class="card-container" >
         <li class="card">
           <h3 class="name">{{this.service.name}}</h3>
-          <h3 class="name">{{this.consumer.username}}</h3>
+          <p class="owner">{{this.owner.username}}</p>
           <p class="category">{{this.service.category}}</p>
           <p class="time">{{this.service.time}}</p>
-          {{#each owner}}
-            <p class="owner">{{this.username}}</p>
-          {{/each}}
-          <p class="state">{{this.state}}</p>
+          <p class="state">{{this.consumerState}}</p>
         </li>
       </div>
+      <form action="/trades/{{this.id}}/confirm" method="post" >
+        <div class="field submit">
+          <button class="button">Confirm</button>
+        </div>
+      </form>
     {{/each}}
   </ul>
 </section>
