@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const Trade = require('../models/trade');
+const User = require('../models/user');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/booked', (req, res, next) => {
@@ -74,22 +75,43 @@ router.post('/:tradeId/confirm', (req, res, next) => {
   Trade.findById(id)
     .populate('owner')
     .populate('consumer')
+    .populate('service')
     .then((results) => {
+      if (results.providerState === 'booked') {
+        return res.redirect('/trades/request');
+      }
       if (results.owner.id === req.session.currentUser._id) {
-        if (results.providerState === 'booked') {
-          return res.redirect('/trades/request');
-        }
-        Trade.findByIdAndUpdate(id, { providerState: 'confirmed' })
-          .then(() => {
-            res.redirect('/trades/requested');
+        Trade.findByIdAndUpdate(id, { providerState: 'confirmed' }, { new: true })
+          .populate('service')
+          .populate('owner')
+          .populate('consumer')
+          .then((results) => {
+            const providerId = results.owner.id;
+            const consumerId = results.consumer.id;
+            const time = Number(results.service.time);
+            if (results.consumerState === 'confirmed' && results.providerState === 'confirmed') {
+              User.findOneAndUpdate({ '_id': ObjectId(providerId) }, { $inc: { coins: time } })
+                .then(() => {
+                  User.findByIdAndUpdate({ '_id': ObjectId(consumerId) }, { $inc: { coins: -time } })
+                    .then();
+                });
+            }
+            return res.redirect('/trades/requested');
           });
       } else if (results.consumer.id === req.session.currentUser._id) {
-        Trade.findByIdAndUpdate(id, { consumerState: 'confirmed' })
-          .then(() => {
-            res.redirect('/trades/booked');
+        Trade.findByIdAndUpdate(id, { consumerState: 'confirmed' }, { new: true })
+          .populate('service')
+          .populate('owner')
+          .populate('consumer')
+          .then((results) => {
+            const consumerId = results.consumer.id;
+            const time = Number(results.service.time);
+            if (results.consumerState === 'confirmed' && results.providerState === 'confirmed') {
+              User.findByIdAndUpdate({ '_id': ObjectId(consumerId) }, { $inc: { coins: time } });
+            }
+            return res.redirect('/trades/booked');
           });
       } else {
-        // something went wrong
         return next('something went wrong');
       }
     })
