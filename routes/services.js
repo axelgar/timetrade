@@ -50,11 +50,13 @@ router.post('/create', (req, res, next) => {
 });
 
 router.get('/:serviceId', (req, res, next) => {
+  // Check if there is a currentUser
+
   const id = req.params.serviceId;
   if (!ObjectId.isValid(id)) {
     return res.redirect('/services');
   }
-  Service.findById(id)
+  Service.findOne({ _id: id })
     .populate('owner')
     .then((results) => {
       const data = {

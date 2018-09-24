@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "sass": "node-sass --output-style compressed --source-maps true styles/style.scss public/stylesheet/style.css",
+    "sass-watch": "node-sass --output-style compressed --source-maps true --watch styles/style.scss public/stylesheet/style.css",
     "start": "node ./bin/www",
     "start-dev": "nodemon ./bin/www",
     "seed-services": "node ./bin/seed/services",

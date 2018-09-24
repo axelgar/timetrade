@@ -1,20 +1,23 @@
 'use strict';
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const salt = bcrypt.genSaltSync(saltRounds);
 
 const users = [{
   username: 'Caroline',
-  password: 'caroline',
+  password: bcrypt.hashSync('caroline', salt),
   coins: 140
 }, {
   username: 'Axel',
-  password: 'axel',
+  password: bcrypt.hashSync('axel', salt),
   coins: 60
 }, {
   username: 'Gabriela',
-  password: 'gabriela',
+  password: bcrypt.hashSync('gabriela', salt),
   coins: 100
 }, {
   username: 'Guille',
-  password: 'guille',
+  password: bcrypt.hashSync('guille', salt),
   coins: 30
 }];
 

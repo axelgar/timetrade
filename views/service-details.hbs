@@ -4,9 +4,7 @@
     <img src="/images/services.jpg">
   </div>
   <h2><span class="name">{{service.name}}</span></h2>
-  {{#each service.owner}}
-    <p class="username">{{this.username}}</p>
-  {{/each}}  
+  <p class="username">Owner: {{service.owner.username}}</p>
   <p>{{service.description}}</p>
   <p class="category">{{service.category}}</p>
   <p class="time">{{service.time}}</p>
@@ -16,7 +14,7 @@
   {{/unless}}
   {{#if currentUser}}
 
-    <form action="/trades/{{service.id}}/{{service.owner.0._id}}/create" method="post" >
+    <form action="/trades/{{service.id}}/{{service.owner._id}}/create" method="post" >
       <div class="field submit">
         <button class="button">Book</button>
       </div>

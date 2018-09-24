@@ -6,6 +6,7 @@ const Trade = require('../models/trade');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/booked', (req, res, next) => {
+  // Check if there is a currentUser
   Trade.find({ consumer: { _id: req.session.currentUser._id } })
     .populate('consumer')
     .populate('service')
@@ -45,16 +46,23 @@ router.post('/:tradeId/accept', (req, res, next) => {
 router.post('/:tradeId/confirm', (req, res, next) => {
   const id = req.params.tradeId;
   Trade.findById(id)
+    .populate('owner')
+    .populate('consumer')
     .then((results) => {
-      const ownerId = 
-      if (results.owner._id === req.session.currentUser._id) {
-        Trade.findByIdAndUpdate(id, { providerState: 'confirmed' });
+      if (results.owner.id === req.session.currentUser._id) {
+        Trade.findByIdAndUpdate(id, { providerState: 'confirmed' })
+          .then(() => {
+            res.redirect('/trades/requested');
+          });
+      } else if (results.consumer.id === req.session.currentUser._id) {
+        Trade.findByIdAndUpdate(id, { consumerState: 'confirmed' })
+          .then(() => {
+            res.redirect('/trades/booked');
+          });
       } else {
-        Trade.findByIdAndUpdate(id, { consumerState: 'confirmed' });
+        // something went wrong
+        return next('something went wrong');
       }
-    })
-    .then(() => {
-      res.redirect('/services');
     })
     .catch(next);
 });
