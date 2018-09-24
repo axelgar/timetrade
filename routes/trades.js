@@ -6,14 +6,22 @@ const Trade = require('../models/trade');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/booked', (req, res, next) => {
-  // Check if there is a currentUser
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
   Trade.find({ consumer: { _id: req.session.currentUser._id } })
     .populate('consumer')
     .populate('service')
     .populate('owner')
     .then((results) => {
+      results.forEach(trade => {
+        if (trade.consumerState === 'accepted' || trade.consumerState === 'confirmed') {
+          trade.isAccepted = true;
+        }
+      });
       const data = {
         trades: results
+
       };
       res.render('trades-booked', data);
     })
@@ -21,11 +29,23 @@ router.get('/booked', (req, res, next) => {
 });
 
 router.get('/requested', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
   Trade.find({ owner: { _id: req.session.currentUser._id } })
     .populate('consumer')
     .populate('service')
     .populate('owner')
     .then((results) => {
+      results.forEach(trade => {
+        if (trade.providerState === 'accepted' || trade.providerState === 'confirmed') {
+          trade.isAccepted = true;
+        }
+      });
+      // let isConfirm = false;
+      // if (results.providerState === 'confirmed') {
+      //   isConfirm = true;
+      // }
       const data = {
         trades: results
       };
@@ -35,6 +55,9 @@ router.get('/requested', (req, res, next) => {
 });
 
 router.post('/:tradeId/accept', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
   const id = req.params.tradeId;
   Trade.findByIdAndUpdate(id, { '$set': { 'providerState': 'accepted', 'consumerState': 'accepted' } })
     .then(() => {
@@ -44,12 +67,18 @@ router.post('/:tradeId/accept', (req, res, next) => {
 });
 
 router.post('/:tradeId/confirm', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
   const id = req.params.tradeId;
   Trade.findById(id)
     .populate('owner')
     .populate('consumer')
     .then((results) => {
       if (results.owner.id === req.session.currentUser._id) {
+        if (results.providerState === 'booked') {
+          return res.redirect('/trades/request');
+        }
         Trade.findByIdAndUpdate(id, { providerState: 'confirmed' })
           .then(() => {
             res.redirect('/trades/requested');
@@ -70,15 +99,12 @@ router.post('/:tradeId/confirm', (req, res, next) => {
 router.post('/:serviceId/:ownerId/create', (req, res, next) => {
   const id = req.params.serviceId;
   const ido = req.params.ownerId;
-
   if (!req.session.currentUser) {
     return res.redirect('/services/id');
   }
-
   if (!ObjectId.isValid(id)) {
     return res.redirect('/services/id');
   }
-
   // Service.findById(id)
   //   .populate('owner')
   //   .then((result) => {

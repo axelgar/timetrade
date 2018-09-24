@@ -10,12 +10,14 @@
           <p class="time">{{this.service.time}}</p>
           <p class="state">{{this.consumerState}}</p>
         </li>
-      </div>
+      {{#if this.isAccepted}}
       <form action="/trades/{{this.id}}/confirm" method="post" >
         <div class="field submit">
           <button class="button">Confirm</button>
         </div>
       </form>
+      {{/if}}
+      </div>
     {{/each}}
   </ul>
 </section>
