@@ -59,8 +59,10 @@ router.get('/:serviceId', (req, res, next) => {
   Service.findOne({ _id: id })
     .populate('owner')
     .then((results) => {
+      const coinsError = req.flash('coins-book-error');
       const data = {
-        service: results
+        service: results,
+        message: coinsError[0]
       };
       res.render('service-details', data);
     })
