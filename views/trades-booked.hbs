@@ -10,6 +10,9 @@
           <p class="time">{{this.service.time}}</p>
           <p class="state">{{this.consumerState}}</p>
         </li>
+      {{#if message}}
+        <p class="validation">{{message}}</p>
+      {{/if}}
       {{#if this.isAccepted}}
       <form action="/trades/{{this.id}}/confirm" method="post" >
         <div class="field submit">

@@ -12,8 +12,10 @@
   {{#unless currentUser}}
   <p>Log-in to book service</p>
   {{/unless}}
+  {{#if message}}
+        <p class="validation">{{message}}</p>
+  {{/if}}
   {{#if currentUser}}
-
     <form action="/trades/{{service.id}}/{{service.owner._id}}/create" method="post" >
       <div class="field submit">
         <button class="button">Book</button>
