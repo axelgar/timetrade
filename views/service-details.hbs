@@ -15,7 +15,8 @@
   <p>Log-in to book service</p>
   {{/unless}}
   {{#if currentUser}}
-    <form action="/trades/{{service.id}}/create" method="post" >
+
+    <form action="/trades/{{service.id}}/{{service.owner.0._id}}/create" method="post" >
       <div class="field submit">
         <button class="button">Book</button>
       </div>

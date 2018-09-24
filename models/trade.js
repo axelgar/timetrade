@@ -13,6 +13,10 @@ const tradeSchema = new Schema({
     type: ObjectId,
     ref: 'User'
   },
+  owner: {
+    type: ObjectId,
+    ref: 'User'
+  },
   state: {
     type: String,
     enum: ['booked', 'accepted', 'confirmed', 'rejected', 'cancelled'],

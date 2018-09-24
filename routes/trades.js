@@ -3,15 +3,14 @@
 const express = require('express');
 const router = express.Router();
 const Trade = require('../models/trade');
-const Service = require('../models/service');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', (req, res, next) => {
-  Trade.find({})
-    .populate('service')
+  Trade.find({ $or: [{ consumer: { _id: req.session.currentUser._id } }, { owner: { _id: req.session.currentUser._id } }] })
     .populate('consumer')
+    .populate('service')
+    .populate('owner')
     .then((results) => {
-      // results.find({ $or: { consumer: { _id: req.session.currentUser._id } }, service: { owner: { _id: req.session.currentUser._id } } });
       const data = {
         trades: results
       };
@@ -20,8 +19,9 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/:serviceId/create', (req, res, next) => {
+router.post('/:serviceId/:ownerId/create', (req, res, next) => {
   const id = req.params.serviceId;
+  const ido = req.params.ownerId;
 
   if (!req.session.currentUser) {
     return res.redirect('/services/id');
@@ -37,9 +37,10 @@ router.post('/:serviceId/create', (req, res, next) => {
   //     if (req.session.currentUser === result.owner[0]) {
   //       return res.redirect('/services/id');
   //     }
+  const owner = ido;
   const service = id;
   const consumer = req.session.currentUser;
-  const trade = new Trade({ consumer, service });
+  const trade = new Trade({ consumer, service, owner });
   trade.save()
     .then(() => {
       res.redirect('/services');
