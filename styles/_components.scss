@@ -8,7 +8,7 @@
   padding: 10px 15px;
   border-radius: 10px;
   font-size: 20px;
-  border: rgb(255, 255, 255) 2px solid;
+  border: rgb(255, 255, 255) 1px solid;
   margin-bottom: 10px;
 }
 
@@ -24,9 +24,9 @@
     text-align: justify;
     margin: 0 10px;
     padding-bottom: 10px;
+    text-align: center;
   }
   .username, .category, .time{
-    text-align: center;
     padding-bottom: 10px;
   }
 }

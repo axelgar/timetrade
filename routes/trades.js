@@ -3,25 +3,65 @@
 const express = require('express');
 const router = express.Router();
 const Trade = require('../models/trade');
-const Service = require('../models/service');
 const ObjectId = require('mongoose').Types.ObjectId;
 
-router.get('/', (req, res, next) => {
-  Trade.find({})
-    .populate('service')
+router.get('/booked', (req, res, next) => {
+  Trade.find({ consumer: { _id: req.session.currentUser._id } })
     .populate('consumer')
+    .populate('service')
+    .populate('owner')
     .then((results) => {
-      // results.find({ $or: { consumer: { _id: req.session.currentUser._id } }, service: { owner: { _id: req.session.currentUser._id } } });
       const data = {
         trades: results
       };
-      res.render('trades-mine', data);
+      res.render('trades-booked', data);
     })
     .catch(next);
 });
 
-router.post('/:serviceId/create', (req, res, next) => {
+router.get('/requested', (req, res, next) => {
+  Trade.find({ owner: { _id: req.session.currentUser._id } })
+    .populate('consumer')
+    .populate('service')
+    .populate('owner')
+    .then((results) => {
+      const data = {
+        trades: results
+      };
+      res.render('trades-requested', data);
+    })
+    .catch(next);
+});
+
+router.post('/:tradeId/accept', (req, res, next) => {
+  const id = req.params.tradeId;
+  Trade.findByIdAndUpdate(id, { '$set': { 'providerState': 'accepted', 'consumerState': 'accepted' } })
+    .then(() => {
+      res.redirect('/trades/requested');
+    })
+    .catch(next);
+});
+
+router.post('/:tradeId/confirm', (req, res, next) => {
+  const id = req.params.tradeId;
+  Trade.findById(id)
+    .then((results) => {
+      const ownerId = 
+      if (results.owner._id === req.session.currentUser._id) {
+        Trade.findByIdAndUpdate(id, { providerState: 'confirmed' });
+      } else {
+        Trade.findByIdAndUpdate(id, { consumerState: 'confirmed' });
+      }
+    })
+    .then(() => {
+      res.redirect('/services');
+    })
+    .catch(next);
+});
+
+router.post('/:serviceId/:ownerId/create', (req, res, next) => {
   const id = req.params.serviceId;
+  const ido = req.params.ownerId;
 
   if (!req.session.currentUser) {
     return res.redirect('/services/id');
@@ -37,9 +77,10 @@ router.post('/:serviceId/create', (req, res, next) => {
   //     if (req.session.currentUser === result.owner[0]) {
   //       return res.redirect('/services/id');
   //     }
+  const owner = ido;
   const service = id;
   const consumer = req.session.currentUser;
-  const trade = new Trade({ consumer, service });
+  const trade = new Trade({ consumer, service, owner });
   trade.save()
     .then(() => {
       res.redirect('/services');

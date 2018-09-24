@@ -27,6 +27,8 @@
             <a href="/auth/signup"><li>Signup</li></a>
             {{/unless}}
             {{#if currentUser}}
+            <a href="/trades/booked"><li>Bookings</li></a>
+            <a href="/trades/requested"><li>Requests</li></a>
             <a href="/services/create"><li>Add service</li></a>
             <form method="POST" action="/auth/logout">
               <button class="logout link" type="submit"><li>Logout</li></button>
