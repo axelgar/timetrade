@@ -65,7 +65,7 @@ router.get('/requested', (req, res, next) => {
 
 router.post('/:tradeId/accept', (req, res, next) => {
   const tradeId = req.params.tradeId;
-  const id = req.session.currentUser;
+  const id = req.session.currentUser._id;
   if (!id) {
     return res.redirect('/');
   }
@@ -74,7 +74,7 @@ router.post('/:tradeId/accept', (req, res, next) => {
   };
   Trade.findById(tradeId)
     .then((result) => {
-      if (result.owner.id !== id || result.providerState !== 'booked') {
+      if (result.owner.id.toString() !== id || result.providerState !== 'booked') {
         return res.redirect('/trades/requested');
       }
       Trade.findByIdAndUpdate(tradeId, { '$set': { 'providerState': 'accepted', 'consumerState': 'accepted' } })
