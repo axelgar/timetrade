@@ -74,7 +74,7 @@ router.post('/:tradeId/accept', (req, res, next) => {
   };
   Trade.findById(tradeId)
     .then((result) => {
-      if (result.owner.id.toString() !== id || result.providerState !== 'booked') {
+      if (ObjectId(result.owner.id).toString() !== id || result.providerState !== 'booked') {
         return res.redirect('/trades/requested');
       }
       Trade.findByIdAndUpdate(tradeId, { '$set': { 'providerState': 'accepted', 'consumerState': 'accepted' } })
@@ -95,9 +95,6 @@ router.post('/:tradeId/reject', (req, res, next) => {
   };
   Trade.findById(tradeId)
     .then((result) => {
-      if (result.consumerState !== 'booked' || result.providerState !== 'accepted') {
-        next();
-      }
       Trade.findByIdAndUpdate(tradeId, { '$set': { 'providerState': 'rejected', 'consumerState': 'rejected' } })
         .populate('service')
         .then((result) => {
@@ -143,7 +140,7 @@ router.post('/:tradeId/confirm', (req, res, next) => {
             return res.redirect('/trades/requested');
           });
       } else if (results.consumer.id === req.session.currentUser._id) {
-        Trade.findByIdAndUpdate(id, { consumerState: 'confirmed' }, { new: true })
+        Trade.findByIdAndUpdate(tradeId, { consumerState: 'confirmed' }, { new: true })
           .populate('service')
           .populate('owner')
           .populate('consumer')

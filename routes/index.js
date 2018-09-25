@@ -7,7 +7,7 @@ const User = require('../models/user');
 /* GET home page. */
 router.get('/', (req, res, next) => {
   if (req.session.currentUser) {
-    User.findById(req.session.currentUser.id)
+    User.findById(req.session.currentUser._id)
       .then((results) => {
         const data = {
           user: results,
