@@ -8,7 +8,8 @@
     "start": "node ./bin/www",
     "start-dev": "nodemon ./bin/www",
     "seed-services": "node ./bin/seed/services",
-    "seed-users": "node ./bin/seed/users"
+    "seed-users": "node ./bin/seed/users",
+    "postinstall": "npm run sass"
   },
   "engines": {
     "node": "10.9.0",
