@@ -27,7 +27,7 @@ const services = [{
   description: 'Private class with a professional yoga teacher with 10 years of experience',
   time: 60,
   category: 'sports',
-  url: '../public/images/Yoga.jpeg'
+  url: '../images/Yoga.jpeg'
 }];
 
 module.exports = services;
