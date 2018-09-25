@@ -1,10 +1,10 @@
 <section class="section services">
   <div class="card-container">
   <div class="image">
-    <img src="/images/services.jpg">
+    <img src="{{service.url}}" alt="{{service.name}}">
   </div>
   <h2><span class="name">{{service.name}}</span></h2>
-  <p class="username">Owner: {{service.owner.username}}</p>
+  <a href="/profile/{{service.owner._id}}" class="username">Owner: {{service.owner.username}}</a>
   <p>{{service.description}}</p>
   <p class="category">{{service.category}}</p>
   <p class="time">{{service.time}}</p>

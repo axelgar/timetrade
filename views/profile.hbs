@@ -1,0 +1,24 @@
+<section class="profiel">
+  <h2>{{user.username}}</h2>
+  <h4>Time left {{user.coins}} mins</h4>
+  <h4>My trades</h4>
+  {{#if services.isMyProfile}}
+    <div class="bottons">
+      <a href="/services/create" class="button">Add service</a>
+    </div>
+  {{/if}}
+  <ul>
+    {{#each services}}
+      <a href="/services/{{this.id}}"></a>
+        <div class="card-container" >
+          <li class="card">
+            <img src="{{this.url}}" alt="{{this.name}}">
+            <h3 class="name">{{this.name}}</h3>
+            <p class="category">{{this.category}}</p>
+            <p class="time">{{this.time}}</p>
+          </li>
+        </div>
+      </a>
+    {{/each}}
+  </ul>
+</section>
