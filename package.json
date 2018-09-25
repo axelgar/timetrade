@@ -10,8 +10,12 @@
     "seed-services": "node ./bin/seed/services",
     "seed-users": "node ./bin/seed/users"
   },
+  "engines": {
+    "node": "10.9.0",
+    "npm": "6.2.0"
+  },
   "dependencies": {
-    "bcrypt": "^3.0.0",
+    "bcrypt": "^3.0.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "~1.4.3",
