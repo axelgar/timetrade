@@ -15,6 +15,7 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const servicesRouter = require('./routes/services');
 const tradesRouter = require('./routes/trades');
+const profileRouter = require('./routes/profile');
 
 const app = express();
 
@@ -58,6 +59,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/services', servicesRouter);
 app.use('/trades', tradesRouter);
+app.use('/profile', profileRouter);
 
 // Errors
 app.use((req, res, next) => {
