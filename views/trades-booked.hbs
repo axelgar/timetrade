@@ -3,25 +3,27 @@
   <ul>
     {{#each trades}}
       {{#unless this.isRejected}}
-        <div class="card-container" >
-          <li class="card">
-            <h3 class="name">{{this.service.name}}</h3>
-            <p class="owner">{{this.owner.username}}</p>
-            <p class="category">{{this.service.category}}</p>
-            <p class="time">{{this.service.time}}</p>
-            <p class="state">{{this.consumerState}}</p>
-          </li>
-        {{#if message}}
-          <p class="validation">{{message}}</p>
-        {{/if}}
-        {{#if this.isAccepted}}
-        <form action="/trades/{{this.id}}/confirm" method="post" >
-          <div class="field submit">
-            <button class="button">Confirm</button>
+        {{#unless this.isConfirmed}}
+          <div class="card-container" >
+            <li class="card">
+              <h3 class="name">{{this.service.name}}</h3>
+              <p class="owner">{{this.owner.username}}</p>
+              <p class="category">{{this.service.category}}</p>
+              <p class="time">{{this.service.time}}</p>
+              <p class="state">{{this.consumerState}}</p>
+            </li>
+          {{#if message}}
+            <p class="validation">{{message}}</p>
+          {{/if}}
+          {{#if this.isAccepted}}
+          <form action="/trades/{{this.id}}/confirm" method="post" >
+            <div class="field submit">
+              <button class="button">Confirm</button>
+            </div>
+          </form>
+          {{/if}}
           </div>
-        </form>
-        {{/if}}
-        </div>
+        {{/unless}}
       {{/unless}}
     {{/each}}
   </ul>

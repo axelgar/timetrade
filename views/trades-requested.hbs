@@ -3,34 +3,36 @@
   <ul>
     {{#each trades}}
       {{#unless this.isRejected}}
-        <div class="card-container" >
-          <li class="card">
-            <h3 class="name">{{this.service.name}}</h3>
-            <p class="owner">{{this.owner.username}}</p>
-            <p class="category">{{this.service.category}}</p>
-            <p class="time">{{this.service.time}}</p>
-            <p class="state">{{this.providerState}}</p>
-          </li>
-        {{#unless this.isAccepted}}
-          <form action="/trades/{{this.id}}/accept" method="post" >
-            <div class="field submit">
-              <button class="button">Accept</button>
-            </div>
-          </form>
-          <form action="/trades/{{this.id}}/reject" method="post" >
-            <div class="field submit">
-              <button class="button">Reject</button>
-            </div>
-          </form>
+        {{#unless this.isConfirmed}}
+          <div class="card-container" >
+            <li class="card">
+              <h3 class="name">{{this.service.name}}</h3>
+              <p class="owner">{{this.owner.username}}</p>
+              <p class="category">{{this.service.category}}</p>
+              <p class="time">{{this.service.time}}</p>
+              <p class="state">{{this.providerState}}</p>
+            </li>
+          {{#unless this.isAccepted}}
+            <form action="/trades/{{this.id}}/accept" method="post" >
+              <div class="field submit">
+                <button class="button">Accept</button>
+              </div>
+            </form>
+          {{/unless}}
+          {{#if this.isAccepted}}
+            <form action="/trades/{{this.id}}/confirm" method="post" >
+              <div class="field submit">
+                <button class="button">Confirm</button>
+              </div>
+            </form>
+          {{/if}}
+            <form action="/trades/{{this.id}}/reject" method="post" >
+              <div class="field submit">
+                <button class="button">Reject</button>
+              </div>
+            </form>
+          </div>
         {{/unless}}
-        {{#if this.isAccepted}}
-          <form action="/trades/{{this.id}}/confirm" method="post" >
-            <div class="field submit">
-              <button class="button">Confirm</button>
-            </div>
-          </form>
-        {{/if}}
-        </div>
       {{/unless}}
     {{/each}}
   </ul>
