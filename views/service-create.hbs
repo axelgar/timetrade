@@ -1,6 +1,6 @@
 <section class="form create">
 <h1>Create service</h1>
-<form method="POST" action="/services/create" class="services-create">
+<form method="POST" action="/services/create" class="services-create" enctype="multipart/form-data">
 <div class="card-container">
   <div class="field" >
     <label>Name</label>
@@ -32,12 +32,16 @@
       <option value="15" value="{{fields.time}}">15'</option>
     </select>
   </div>
-    {{#if message}}
-      <p class="validation">{{message}}</p>
-    {{/if}}
+  <div>
+    <label>Image</label>
+    <input type="file" name="photo">
   </div>
-  <div class="field submit">
-    <button type="submit" class="button">Add</button>
-  </div>
+  {{#if message}}
+    <p class="validation">{{message}}</p>
+  {{/if}}
+</div>
+<div class="field submit">
+  <button type="submit" class="button">Add</button>
+</div>
 </form>
 </section>

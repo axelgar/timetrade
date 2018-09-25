@@ -24,6 +24,9 @@ const serviceSchema = new Schema({
   category: {
     type: String,
     enum: ['languages', 'technology', 'arts', 'social', 'sports']
+  },
+  url: {
+    type: String
   }
 });
 

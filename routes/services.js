@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const uploadCloud = require('../services/cloudinary.js');
 const router = express.Router();
 const Service = require('../models/service');
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -30,7 +31,7 @@ router.get('/create', (req, res, next) => {
   res.render('service-create', data);
 });
 
-router.post('/create', (req, res, next) => {
+router.post('/create', uploadCloud.single('photo'), (req, res, next) => {
   if (!req.session.currentUser) {
     return res.redirect('/');
   }
@@ -40,8 +41,9 @@ router.post('/create', (req, res, next) => {
     req.flash('service-form-data', { name, description, category, time });
     return res.redirect('/services/create');
   }
+  const url = req.file.url;
   const owner = req.session.currentUser;
-  const service = new Service({ owner, name, description, category, time });
+  const service = new Service({ owner, name, description, category, time, url });
   service.save()
     .then(() => {
       res.redirect('/services');
