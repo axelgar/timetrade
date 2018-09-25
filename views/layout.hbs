@@ -9,9 +9,15 @@
   </head>
   <body>
     <header id="site-header">
-      <nav role="navigation">
+      <nav role="navigation" class="navbar">
+        <a href="/"><img src="../images/logo2.png" class="image" alt="logo"></a>
+        {{#if currentUser}}
+          <div class="timecoins">
+          <a href="/profile/{{currentUser._id}}"><img src="../images/hourglass.png" class="time" alt="time"></a>
+           <a href="/profile/{{currentUser._id}}"><span class="coins">{{currentUser.coins}}</span></a>
+        {{/if}}
+        </div>
         <div id="menuToggle">
-          <a href="/"><img src="../images/logo2.png" class="image" alt="logo"></a>
           <input type="checkbox" />
           <span></span>
           <span></span>

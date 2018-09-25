@@ -31,10 +31,22 @@
 }
 /* nav-bar*/
 #site-header {
-  .image{
+   .image{
     position: absolute;
     width: 40px;
-    left: 70%;
+    left: 80%;
+    margin-top: 15px;
+  }
+  .coins {
+    position: absolute;
+    margin-top: 20px;
+    right: 25%;
+  }
+  .time {
+    position: absolute;
+    right: 33%;
+    width: 20px;
+    margin-top: 17px;
   }
 }
 
