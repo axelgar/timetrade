@@ -20,6 +20,9 @@ router.get('/booked', (req, res, next) => {
         if (trade.consumerState === 'accepted' || trade.consumerState === 'confirmed') {
           trade.isAccepted = true;
         }
+        if (trade.consumerState === 'rejected' || trade.consumerState === 'rejected') {
+          trade.isRejected = true;
+        }
       });
       const data = {
         trades: results
@@ -42,6 +45,9 @@ router.get('/requested', (req, res, next) => {
         if (trade.providerState === 'accepted' || trade.providerState === 'confirmed') {
           trade.isAccepted = true;
         }
+        if (trade.consumerState === 'rejected' || trade.consumerState === 'rejected') {
+          trade.isRejected = true;
+        }
       });
       const data = {
         trades: results
@@ -59,6 +65,23 @@ router.post('/:tradeId/accept', (req, res, next) => {
   Trade.findByIdAndUpdate(tradeid, { '$set': { 'providerState': 'accepted', 'consumerState': 'accepted' } })
     .then(() => {
       res.redirect('/trades/requested');
+    })
+    .catch(next);
+});
+
+router.post('/:tradeId/reject', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  const tradeid = req.params.tradeId;
+  Trade.findByIdAndUpdate(tradeid, { '$set': { 'providerState': 'rejected', 'consumerState': 'rejected' } })
+    .populate('service')
+    .then((result) => {
+      const time = result.service.time;
+      User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } })
+        .then(() => {
+          res.redirect('/trades/requested');
+        });
     })
     .catch(next);
 });
