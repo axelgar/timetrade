@@ -8,11 +8,16 @@
     "start": "node ./bin/www",
     "start-dev": "nodemon ./bin/www",
     "seed-services": "node ./bin/seed/services",
-    "seed-users": "node ./bin/seed/users"
+    "seed-users": "node ./bin/seed/users",
+    "postinstall": "npm run sass"
+  },
+  "engines": {
+    "node": "10.9.0",
+    "npm": "6.2.0"
   },
   "dependencies": {
-    "bcrypt": "^3.0.0",
     "cloudinary": "^1.11.0",
+    "bcrypt": "^3.0.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "~1.4.3",
@@ -25,7 +30,8 @@
     "mongoose": "^5.2.16",
     "morgan": "~1.9.0",
     "multer": "^1.3.1",
-    "multer-storage-cloudinary": "^2.2.1"
+    "multer-storage-cloudinary": "^2.2.1",
+    "node-sass": "^4.9.3"
   },
   "devDependencies": {
     "eslint": "^5.6.0",
