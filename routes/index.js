@@ -6,15 +6,19 @@ const User = require('../models/user');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  User.findById(req.session.currentUser.id)
-    .then((results) => {
-      const data = {
-        user: results,
-        title: 'TimeTrade'
-      };
-      res.render('index', data);
-    })
-    .catch(next);
+  if (req.session.currentUser) {
+    User.findById(req.session.currentUser.id)
+      .then((results) => {
+        const data = {
+          user: results,
+          title: 'TimeTrade'
+        };
+        res.render('index', data);
+      })
+      .catch(next);
+  } else {
+    res.render('index', { title: 'TimeTrade' });
+  }
 });
 
 module.exports = router;
