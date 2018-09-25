@@ -64,27 +64,20 @@ router.get('/requested', (req, res, next) => {
 });
 
 router.post('/:tradeId/accept', (req, res, next) => {
-  if (!req.session.currentUser) {
+  const tradeId = req.params.tradeId;
+  const id = req.session.currentUser;
+  if (!id) {
     return res.redirect('/');
   }
-  const tradeid = req.params.tradeId;
-  Trade.findByIdAndUpdate(tradeid, { '$set': { 'providerState': 'accepted', 'consumerState': 'accepted' } })
-    .then(() => {
-      res.redirect('/trades/requested');
-    })
-    .catch(next);
-});
-
-router.post('/:tradeId/reject', (req, res, next) => {
-  if (!req.session.currentUser) {
-    return res.redirect('/');
-  }
-  const tradeid = req.params.tradeId;
-  Trade.findByIdAndUpdate(tradeid, { '$set': { 'providerState': 'rejected', 'consumerState': 'rejected' } })
-    .populate('service')
+  if (!ObjectId.isValid(tradeId)) {
+    next();
+  };
+  Trade.findById(tradeId)
     .then((result) => {
-      const time = result.service.time;
-      User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } })
+      if (result.owner.id !== id || result.providerState !== 'booked') {
+        return res.redirect('/trades/requested');
+      }
+      Trade.findByIdAndUpdate(tradeId, { '$set': { 'providerState': 'accepted', 'consumerState': 'accepted' } })
         .then(() => {
           res.redirect('/trades/requested');
         });
@@ -92,12 +85,41 @@ router.post('/:tradeId/reject', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/:tradeId/confirm', (req, res, next) => {
+router.post('/:tradeId/reject', (req, res, next) => {
+  const tradeId = req.params.tradeId;
   if (!req.session.currentUser) {
     return res.redirect('/');
   }
-  const id = req.params.tradeId;
-  Trade.findById(id)
+  if (!ObjectId.isValid(tradeId)) {
+    next();
+  };
+  Trade.findById(tradeId)
+    .then((result) => {
+      if (result.consumerState !== 'booked' || result.providerState !== 'accepted') {
+        next();
+      }
+      Trade.findByIdAndUpdate(tradeId, { '$set': { 'providerState': 'rejected', 'consumerState': 'rejected' } })
+        .populate('service')
+        .then((result) => {
+          const time = result.service.time;
+          User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } })
+            .then(() => {
+              res.redirect('/trades/requested');
+            });
+        });
+    })
+    .catch(next);
+});
+
+router.post('/:tradeId/confirm', (req, res, next) => {
+  const tradeId = req.params.tradeId;
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (!ObjectId.isValid(tradeId)) {
+    next();
+  };
+  Trade.findById(tradeId)
     .populate('owner')
     .populate('consumer')
     .populate('service')
@@ -106,7 +128,7 @@ router.post('/:tradeId/confirm', (req, res, next) => {
         return res.redirect('/trades/request');
       }
       if (results.owner.id === req.session.currentUser._id) {
-        Trade.findByIdAndUpdate(id, { providerState: 'confirmed' }, { new: true })
+        Trade.findByIdAndUpdate(tradeId, { providerState: 'confirmed' }, { new: true })
           .populate('service')
           .populate('owner')
           .populate('consumer')
