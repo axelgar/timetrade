@@ -23,6 +23,9 @@ router.get('/booked', (req, res, next) => {
         if (trade.consumerState === 'rejected' || trade.consumerState === 'rejected') {
           trade.isRejected = true;
         }
+        if (trade.consumerState === 'confirmed' && trade.consumerState === 'confirmed') {
+          trade.isConfirmed = true;
+        }
       });
       const data = {
         trades: results
@@ -47,6 +50,9 @@ router.get('/requested', (req, res, next) => {
         }
         if (trade.consumerState === 'rejected' || trade.consumerState === 'rejected') {
           trade.isRejected = true;
+        }
+        if (trade.consumerState === 'confirmed' && trade.consumerState === 'confirmed') {
+          trade.isConfirmed = true;
         }
       });
       const data = {
@@ -141,13 +147,17 @@ router.post('/:serviceId/:ownerId/create', (req, res, next) => {
   const id = req.params.serviceId;
   const ido = req.params.ownerId;
   if (!req.session.currentUser) {
-    return res.redirect('/services/id');
+    return res.redirect('/services/' + id);
   };
   if (!ObjectId.isValid(id)) {
-    return res.redirect('/services/id');
+    return res.redirect('/services/' + id);
   };
   User.findById(userId)
     .then((results) => {
+      if (results.id === ido) {
+        req.flash('coins-book-error', 'Your are the provider of this service');
+        return res.redirect('/services/' + id);
+      }
       const coins = results.coins;
       Service.findById(id)
         .then((result) => {
