@@ -24,7 +24,9 @@ const users = [{
 }, {
   username: 'Guille',
   password: bcrypt.hashSync('guille', salt),
-  coins: 30
+  coins: 30,
+  url: '../images/Guille.JPG',
+  contact: 34660138922
 }];
 
 module.exports = users;
