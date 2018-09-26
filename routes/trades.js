@@ -193,7 +193,7 @@ router.post('/:serviceId/:ownerId/create', (req, res, next) => {
               const trade = new Trade({ consumer, service, owner });
               trade.save()
                 .then(() => {
-                  res.redirect('/services');
+                  res.redirect('/trades/booked');
                 });
             });
         });
