@@ -6,15 +6,19 @@ const salt = bcrypt.genSaltSync(saltRounds);
 const users = [{
   username: 'Caroline',
   password: bcrypt.hashSync('caroline', salt),
-  coins: 140
+  coins: 140,
+  url: '../images/Caroline.jpg'
 }, {
   username: 'Axel',
   password: bcrypt.hashSync('axel', salt),
-  coins: 60
+  coins: 60,
+  url: '../images/Axel.jpeg',
+  contact: 34660138922
 }, {
   username: 'Gabriela',
   password: bcrypt.hashSync('gabriela', salt),
-  coins: 100
+  coins: 100,
+  url: '../images/Gabriela.JPG'
 }, {
   username: 'Guille',
   password: bcrypt.hashSync('guille', salt),

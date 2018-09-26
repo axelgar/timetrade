@@ -1,6 +1,6 @@
 <section class="form">
   <h1>Join us!</h1>
-  <form method="POST" action="/auth/signup">
+  <form method="POST" action="/auth/signup" enctype="multipart/form-data">
     <div class="field" >
         <label>Username</label>
       <div class="card-input">
@@ -13,6 +13,10 @@
       <div class="card-input">
         <img src="/images/key.png">
         <input type="password" name="password" placeholder="Password"/>
+      </div>
+      <div>
+        <label>Image</label>
+        <input type="file" name="photo">
       </div>
     </div>
       {{#if message1}}
