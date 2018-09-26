@@ -15,6 +15,12 @@ const userSchema = new Schema({
   coins: {
     type: Number,
     default: 60
+  },
+  url: {
+    type: String
+  },
+  contact: {
+    type: Number
   }
 });
 
