@@ -24,8 +24,8 @@ router.post('/signup', uploadCloud.single('photo'), (req, res, next) => {
   if (req.session.currentUser) {
     return res.redirect('/');
   }
-  const { username, password } = req.body;
-  if (!req.file || !username || !password) {
+  const { username, password, contact } = req.body;
+  if (!req.file || !username || !password || !contact) {
     req.flash('signup-form-error', 'All fields are mandatory');
     return res.redirect('/auth/signup');
   }
@@ -38,7 +38,7 @@ router.post('/signup', uploadCloud.single('photo'), (req, res, next) => {
       const url = req.file.url;
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
-      const user = new User({ username, password: hashedPassword, url });
+      const user = new User({ username, password: hashedPassword, url, contact });
       return user.save()
         .then(() => {
           req.session.currentUser = user;
