@@ -4,6 +4,7 @@ const express = require('express');
 const uploadCloud = require('../services/cloudinary.js');
 const router = express.Router();
 const Service = require('../models/service');
+const User = require('../models/user');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', (req, res, next) => {
