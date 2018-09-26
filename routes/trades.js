@@ -94,13 +94,14 @@ router.post('/:tradeId/reject', (req, res, next) => {
     next();
   };
   Trade.findById(tradeId)
-    .then((result) => {
+    .then(() => {
       Trade.findByIdAndUpdate(tradeId, { '$set': { 'providerState': 'rejected', 'consumerState': 'rejected' } })
         .populate('service')
         .then((result) => {
           const time = result.service.time;
-          User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } })
-            .then(() => {
+          User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } }, { new: true })
+            .then((user) => {
+              req.session.currentUser = user;
               res.redirect('/trades/requested');
             });
         });

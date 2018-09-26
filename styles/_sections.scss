@@ -11,6 +11,10 @@
     margin-bottom: 5px;
   }
 }
+
+.logout {
+  padding-top: 10px;
+}
 /* index */
 .index {
   padding-top: 30px;
@@ -39,7 +43,7 @@
   }
 }
 
-.services {
+.services, .trades {
   img {
     width: 100%;
     border-radius: 10px;
@@ -112,5 +116,8 @@
   img {
     width: 100%;
     border-radius: 10px;
+  }
+  .bottons {
+    margin-bottom: 15px;
   }
 }
