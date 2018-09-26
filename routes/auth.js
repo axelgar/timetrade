@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const uploadCloud = require('../services/cloudinary.js');
 const router = express.Router();
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
@@ -19,13 +20,13 @@ router.get('/signup', (req, res, next) => {
   res.render('signup', data);
 });
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup', uploadCloud.single('photo'), (req, res, next) => {
   if (req.session.currentUser) {
     return res.redirect('/');
   }
-  const { username, password } = req.body;
-  if (!username || !password) {
-    req.flash('signup-form-error', 'Username and password are mandatory');
+  const { username, password, contact } = req.body;
+  if (!req.file || !username || !password || !contact) {
+    req.flash('signup-form-error', 'All fields are mandatory');
     return res.redirect('/auth/signup');
   }
   User.findOne({ username })
@@ -34,13 +35,14 @@ router.post('/signup', (req, res, next) => {
         req.flash('username-form-error', 'This username is already taken :( ');
         return res.redirect('/auth/signup');
       }
+      const url = req.file.url;
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
-      const user = new User({ username, password: hashedPassword });
+      const user = new User({ username, password: hashedPassword, url, contact });
       return user.save()
         .then(() => {
           req.session.currentUser = user;
-          res.redirect('/');
+          res.redirect('/services');
         });
     })
     .catch(next);
@@ -82,7 +84,7 @@ router.post('/login', (req, res, next) => {
         return res.redirect('/auth/login');
       }
       req.session.currentUser = result;
-      res.redirect('/');
+      res.redirect('/services');
     })
     .catch(next);
 });

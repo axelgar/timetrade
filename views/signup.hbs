@@ -1,18 +1,26 @@
 <section class="form">
   <h1>Join us!</h1>
-  <form method="POST" action="/auth/signup">
+  <form method="POST" action="/auth/signup" enctype="multipart/form-data">
     <div class="field" >
-        <label>Username</label>
+      <label>Username</label>
       <div class="card-input">
         <img src="/images/user.png">
         <input type="text" name="username" value="{{fields.username}}" placeholder="Username"/>
       </div>
     </div>
     <div class="field" >
-        <label>Password: </label>
+      <label>Password: </label>
       <div class="card-input">
         <img src="/images/key.png">
         <input type="password" name="password" placeholder="Password"/>
+      </div>
+      <label>Contact</label>
+      <div class="card-input">
+        <input type="text" name="contact" placeholder="Whatsapp number +34"/>
+      </div>
+      <div>
+        <label>Image</label>
+        <input type="file" name="photo">
       </div>
     </div>
       {{#if message1}}

@@ -37,7 +37,7 @@ router.post('/create', uploadCloud.single('photo'), (req, res, next) => {
     return res.redirect('/');
   }
   const { name, description, category, time } = req.body;
-  if (!name || !description || !category || !time) {
+  if (!req.file || !name || !description || !category || !time) {
     req.flash('service-form-error', 'all fields are mandatory');
     req.flash('service-form-data', { name, description, category, time });
     return res.redirect('/services/create');
