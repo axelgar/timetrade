@@ -25,7 +25,6 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE
 });
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(session({
