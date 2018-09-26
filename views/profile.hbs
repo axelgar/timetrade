@@ -11,6 +11,11 @@
   <ul class="services">
     {{#each services}}
       <a href="/services/{{this.id}}"></a>
+        <form action="/trades/{{this.id}}/reject" method="post" >
+          <div class="field submit">
+            <a class="button">Delete</a>
+          </div>
+        </form>
         <div class="card-container" >
           <li class="card">
             <img src="{{this.url}}" alt="{{this.name}}">

@@ -7,7 +7,8 @@ const users = [{
   username: 'Caroline',
   password: bcrypt.hashSync('caroline', salt),
   coins: 140,
-  url: '../images/Caroline.jpg'
+  url: '../images/Caroline.jpg',
+  contact: 34660138922
 }, {
   username: 'Axel',
   password: bcrypt.hashSync('axel', salt),
@@ -18,7 +19,8 @@ const users = [{
   username: 'Gabriela',
   password: bcrypt.hashSync('gabriela', salt),
   coins: 100,
-  url: '../images/Gabriela.JPG'
+  url: '../images/Gabriela.JPG',
+  contact: 34660138922
 }, {
   username: 'Guille',
   password: bcrypt.hashSync('guille', salt),
