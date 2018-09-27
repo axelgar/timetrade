@@ -11,15 +11,28 @@ body {
 
 h4 {
   margin-bottom: 10px;
+  margin-top: 15px;
+
 }
 
 p {
   margin: auto;
 }
+
+.card-container{
+  p, a{
+    text-shadow: 1px 1px 3px black;
+    
+  }
+  .category {
+    font-size: 15px;
+  }
+}
+
 li{
   font-size: 25px;
-  margin-bottom: 15px;
-}
+/*   margin-bottom: 15px;
+ */}
 input {
   font-family: 'Varela Round', sans-serif;
 }

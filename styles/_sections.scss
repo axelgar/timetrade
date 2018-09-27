@@ -35,11 +35,18 @@
 }
 /* nav-bar*/
 #site-header {
-   .image{
+  .image{
     width: 45px;
   }
   .time {
-    width: 20px;
+    width: 22px;
+    margin-bottom: -5px;
+  }
+}
+
+body.scrolled {
+  .coins{
+    color: rgb(166, 104, 240);
   }
 }
 
@@ -47,11 +54,14 @@
   img {
     width: 100%;
     border-radius: 10px;
-  
   }
+
+  ul{
+    margin: auto;
+  }
+
   li {
-    margin-bottom: 20px;
-    position: relative;
+    margin: auto;
 
   }
 }

@@ -56,9 +56,10 @@ router.get('/:serviceId', (req, res, next) => {
   if (!ObjectId.isValid(id)) {
     next();
   }
-  Service.findOne({ _id: id })
+  Service.findById(id)
     .populate('owner')
     .then((results) => {
+      console.log(results);
       const coinsError = req.flash('coins-book-error');
       const data = {
         service: results,

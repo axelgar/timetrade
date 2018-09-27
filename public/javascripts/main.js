@@ -1,13 +1,24 @@
-'use strics';
+'use strict';
+const body = document.getElementsByTagName('body')[0];
 
-var prevScrollpos = window.pageYOffset;
 window.onscroll = function () {
   var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos < currentScrollPos) {
-    document.querySelector('#nav-bg').style.top = '-1px';
+  if (currentScrollPos > 35) {
+    body.classList.add('scrolled');
+    document.querySelector('.time').src = '/images/hourglass2.png';
   } else {
-    document.querySelector('#nav-bg').style.top = '-80px';
+    body.classList.remove('scrolled');
+    document.querySelector('.time').src = '/images/hourglass.png';
   }
-  prevScrollpos = currentScrollPos;
-}
-;
+};
+
+const checkbox = document.querySelector('.menu-checkbox');
+
+document.body.addEventListener('click', () => {
+  if (checkbox.checked === false) {
+    checkbox.checked = true;
+  } else {
+    checkbox.checked = false;
+  }
+  checkbox.addEventListener('click', event => event.stopPropagation(event));
+});

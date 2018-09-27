@@ -29,7 +29,7 @@ router.post('/signup', uploadCloud.single('photo'), (req, res, next) => {
     req.flash('signup-form-error', 'All fields are mandatory');
     return res.redirect('/auth/signup');
   }
-  User.findOne({ username })
+  return User.findOne({ username })
     .then(result => {
       if (result) {
         req.flash('username-form-error', 'This username is already taken :( ');
