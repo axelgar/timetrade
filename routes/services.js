@@ -4,7 +4,6 @@ const express = require('express');
 const uploadCloud = require('../services/cloudinary.js');
 const router = express.Router();
 const Service = require('../models/service');
-const User = require('../models/user');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', (req, res, next) => {
@@ -66,6 +65,19 @@ router.get('/:serviceId', (req, res, next) => {
         message: coinsError[0]
       };
       res.render('service-details', data);
+    })
+    .catch(next);
+});
+
+router.post('/:serviceId/delete', (req, res, next) => {
+  const id = req.params.serviceId;
+  const idu = req.session.currentUser._id;
+  if (!ObjectId.isValid(id)) {
+    return res.redirect('/services');
+  }
+  Service.remove({ _id: id })
+    .then(() => {
+      res.redirect('/profile/' + idu);
     })
     .catch(next);
 });

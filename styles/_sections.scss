@@ -43,15 +43,15 @@
   }
 }
 
-.services, .trades {
+.services, .trades{
   img {
-
+    width: 100%;
     border-radius: 10px;
   
   }
   li {
-    margin-bottom: 50px;
-   position: relative;
+    margin-bottom: 20px;
+    position: relative;
 
   }
 }
@@ -112,6 +112,18 @@
     height: 100px;
     width: 80%;
   }
+}
+
+.trades {
+
+  li {
+    font-size: 20px;
+  }
+  p , a{
+    font-size: 16px;
+  }
+  
+
 }
 
 .validation {

@@ -102,7 +102,7 @@ router.post('/:tradeId/reject', (req, res, next) => {
           User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } }, { new: true })
             .then((user) => {
               req.session.currentUser = user;
-              res.redirect('/trades/requested');
+              res.redirect('/services');
             });
         });
     })
