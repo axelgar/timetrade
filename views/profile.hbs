@@ -4,17 +4,21 @@
   {{#if isMyProfile}}
   <h4>Time left {{user.coins}} mins</h4>
   {{/if}}
-  <h3>My trades</h3>
   {{#if isMyProfile}}
     <div class="bottons">
       <a href="/services/create" class="button">Add service</a>
     </div>
   {{/if}}
+  <h3>My trades</h3>
   <ul class="services">
     {{#each services}}
-        <a href="/services/{{this.id}}"></a>
         <div class="card-container">
           <li class="card">
+            <a href="/services/{{this.id}}">
+              <img src="{{this.url}}" alt="{{this.name}}">
+            </a>
+            <h3 class="name">{{this.name}}</h3>
+            <p class="time">{{this.time}}</p>
             {{#if ../this.isMyProfile}}
               <form action="/services/{{this.id}}/delete" method="post">
                 <div class="field submit">
@@ -22,13 +26,8 @@
                 </div>
               </form>
             {{/if}}
-            <img src="{{this.url}}" alt="{{this.name}}">
-            <h3 class="name">{{this.name}}</h3>
-            <p class="category">{{this.category}}</p>
-            <p class="time">{{this.time}}</p>
           </li>
         </div>
-      </a>
     {{/each}}
   </ul>
 </section>
