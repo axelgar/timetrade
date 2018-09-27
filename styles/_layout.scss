@@ -13,9 +13,28 @@ body {
 
 #site-header {
   color: white;
+  padding: 0 20px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .nav-item {
+    width: 80px;
+    text-align: center;
+  }
+}
+
+#nav-bg {
   position: fixed;
   width: 100%;
   top: 0;
+  height: 80px;
+  background-color: white;
+  transition: top 0.3s;
 }
 
 #site-footer {

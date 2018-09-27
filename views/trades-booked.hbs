@@ -4,10 +4,14 @@
     {{#each trades}}
       {{#unless this.isRejected}}
         {{#unless this.isConfirmed}}
-          <div class="card-container" >
+          <div class="card-container">
+            <div class="image">
+              <img src="{{this.service.url}}" alt="{{this.service.name}}">
+            </div>
             <li class="card">
               <h3 class="name">{{this.service.name}}</h3>
-              <p class="owner">{{this.owner.username}}</p>
+              <p class="owner">Provider: {{this.owner.username}}</p>
+              <a href="https://api.whatsapp.com/send?phone={{this.owner.contact}}">Send a message to the provider</a>
               <p class="category">{{this.service.category}}</p>
               <p class="time">{{this.service.time}}</p>
               <p class="state">{{this.consumerState}}</p>
@@ -22,6 +26,11 @@
             </div>
           </form>
           {{/if}}
+          <form action="/trades/{{this.id}}/reject" method="post" >
+            <div class="field submit">
+              <button class="button">Reject</button>
+            </div>
+          </form>
           </div>
         {{/unless}}
       {{/unless}}

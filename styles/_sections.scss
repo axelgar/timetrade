@@ -11,6 +11,10 @@
     margin-bottom: 5px;
   }
 }
+
+.logout {
+  padding-top: 10px;
+}
 /* index */
 .index {
   padding-top: 30px;
@@ -32,25 +36,14 @@
 /* nav-bar*/
 #site-header {
    .image{
-    position: absolute;
-    width: 40px;
-    left: 80%;
-    margin-top: 15px;
-  }
-  .coins {
-    position: absolute;
-    margin-top: 20px;
-    right: 25%;
+    width: 45px;
   }
   .time {
-    position: absolute;
-    right: 33%;
     width: 20px;
-    margin-top: 17px;
   }
 }
 
-.services {
+.services, .trades {
   img {
 
     border-radius: 10px;
@@ -85,24 +78,21 @@
 
 .form {
   h1 {
-    font-size: 40px;
-    padding-bottom: 40px;
+    font-size: 30px;
   }
   img {
     width: 30px;
   }
   input {
-    font-size: 23px;
+    font-size: 18px;
     background: transparent;
     border: 0;
     text-align: center;
+    max-width: 80%;
   }
   input:focus, select:focus, textarea:focus {
     outline: 0;
 
-  }
-  button {
-    margin-top: 20px;
   }
   label {
     display: block;
@@ -126,4 +116,14 @@
 
 .validation {
   color: rgb(176, 55, 34);
+}
+
+.profile {
+  img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  .bottons {
+    margin-bottom: 15px;
+  }
 }

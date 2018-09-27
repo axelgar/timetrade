@@ -94,13 +94,14 @@ router.post('/:tradeId/reject', (req, res, next) => {
     next();
   };
   Trade.findById(tradeId)
-    .then((result) => {
+    .then(() => {
       Trade.findByIdAndUpdate(tradeId, { '$set': { 'providerState': 'rejected', 'consumerState': 'rejected' } })
         .populate('service')
         .then((result) => {
           const time = result.service.time;
-          User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } })
-            .then(() => {
+          User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } }, { new: true })
+            .then((user) => {
+              req.session.currentUser = user;
               res.redirect('/trades/requested');
             });
         });
@@ -148,8 +149,9 @@ router.post('/:tradeId/confirm', (req, res, next) => {
             const providerId = results.owner.id;
             const time = Number(results.service.time);
             if (results.consumerState === 'confirmed' && results.providerState === 'confirmed') {
-              User.findOneAndUpdate({ '_id': ObjectId(providerId) }, { $inc: { coins: time } })
-                .then(() => {
+              User.findOneAndUpdate({ '_id': ObjectId(providerId) }, { $inc: { coins: time } }, { new: true })
+                .then((user) => {
+                  req.session.currentUser = user;
                 });
             }
             return res.redirect('/trades/booked');
@@ -185,15 +187,16 @@ router.post('/:serviceId/:ownerId/create', (req, res, next) => {
             req.flash('coins-book-error', 'We are sorry but you do not have enough time');
             return res.redirect('/services/' + id);
           }
-          User.findByIdAndUpdate({ '_id': ObjectId(userId) }, { $inc: { coins: -time } })
-            .then(() => {
+          User.findByIdAndUpdate({ '_id': ObjectId(userId) }, { $inc: { coins: -time } }, { new: true })
+            .then((user) => {
               const owner = ido;
               const service = id;
               const consumer = req.session.currentUser;
               const trade = new Trade({ consumer, service, owner });
+              req.session.currentUser = user;
               trade.save()
                 .then(() => {
-                  res.redirect('/services');
+                  res.redirect('/trades/booked');
                 });
             });
         });
