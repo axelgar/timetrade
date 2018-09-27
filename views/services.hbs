@@ -3,18 +3,19 @@
   <ul>
     {{#each services}}
     <a href="/services/{{this.id}}">
-      <div class="card-container" >
-        <li class="card">
-          <img src="{{this.url}}" alt="{{this.name}}">
-          <h3 class="name">{{this.name}}</h3>
-          <p class="category">{{this.category}}</p>
+      <div class="card-container" style="background-image:url({{this.url}});background-size:100%">
+        <li>
+         {{!-- <img src="{{this.url}}" alt="{{this.name}}"> --}}
           <p class="time">{{this.time}}</p>
+          <p class="name">{{this.name}}</p>
+          <p class="category">{{this.category}}</p>
+          
           {{#each this.owner}}
-            <p class="owner">{{this.username}}</p>
+            <ul class="owner">{{this.username}}</ul>
           {{/each}}
         </li>
       </div>
     </a>
     {{/each}}
-  </ul>
+  </p>
 </section>

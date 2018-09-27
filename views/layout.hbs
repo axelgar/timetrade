@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   </head>
   <body>
-    <div id='nav-bg'></div>
+    <div id='nav-bg' style="top: -80px;"></div>
     <nav role="navigation" id="site-header" class="navbar">
       <div id="menuToggle" class="burger nav-item">
         <input type="checkbox" />
@@ -18,22 +18,22 @@
         <span id="burger-icon"></span>
         <ul id="menu">
           {{#if currentUser}}
-          <p>Hello {{currentUser.username}}!</p>
+            <p>Hello {{currentUser.username}}!</p>
           {{/if}}
           <a href="/"><li>Home</li></a>
           <a href="/services"><li>Explore</li></a>
           {{#unless currentUser}}
-          <a href="/auth/login" ><li>Login</li></a>
-          <a href="/auth/signup"><li>Signup</li></a>
+            <a href="/auth/login" ><li>Login</li></a>
+            <a href="/auth/signup"><li>Signup</li></a>
           {{/unless}}
           {{#if currentUser}}
-          <a href="/profile/{{currentUser._id}}"><li>Profile</li></a>
-          <a href="/trades/booked"><li>Bookings</li></a>
-          <a href="/trades/requested"><li>Requests</li></a>
-          <a href="/services/create"><li>Add service</li></a>
-          <form method="POST" action="/auth/logout">
-            <button class="logout link" type="submit"><li>Logout</li></button>
-          </form>
+            <a href="/profile/{{currentUser._id}}"><li>Profile</li></a>
+            <a href="/trades/booked"><li>My Bookings</li></a>
+            <a href="/trades/requested"><li>My Requests</li></a>
+            <a href="/services/create"><li>Add service</li></a>
+            <form method="POST" action="/auth/logout">
+              <button class="logout link" type="submit"><li>Logout</li></button>
+            </form>
           {{/if}}
         </ul>
       </div>
@@ -44,7 +44,7 @@
         {{#if currentUser}}
           <a href="/profile/{{currentUser._id}}"><img src="../images/hourglass.png" class="time" alt="time"></a>
           <a href="/profile/{{currentUser._id}}"><span class="coins">{{currentUser.coins}}</span></a>
-      {{/if}}
+        {{/if}}
       </div>
     </nav>
     <main id="site-main" class="container">
@@ -57,6 +57,6 @@
         <li>Terms</li>
       </ul>
     </footer>
-    <script src="/javascripts/main.js"></script>
+    <script src="../javascripts/main.js"></script>
   </body>
 </html>

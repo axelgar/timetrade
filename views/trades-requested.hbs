@@ -4,7 +4,10 @@
     {{#each trades}}
       {{#unless this.isRejected}}
         {{#unless this.isConfirmed}}
-          <div class="card-container" >
+          <div class="card-container">
+            <div class="image">
+              <img src="{{this.service.url}}" alt="{{this.service.name}}">
+            </div>
             <li class="card">
               <h3 class="name">{{this.service.name}}</h3>
               <p class="owner">{{this.consumer.username}}</p>

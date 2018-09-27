@@ -11,6 +11,10 @@
     margin-bottom: 5px;
   }
 }
+
+.logout {
+  padding-top: 10px;
+}
 /* index */
 .index {
   padding-top: 30px;
@@ -24,7 +28,7 @@
   }
   .card {
     img {
-      width: 50%;
+      width: 100%;
       border-radius: 60%;
     }
   }
@@ -46,10 +50,16 @@ body.scrolled {
   }
 }
 
-.services {
+.services, .trades{
   img {
     width: 100%;
     border-radius: 10px;
+  
+  }
+  li {
+    margin-bottom: 20px;
+    position: relative;
+
   }
 }
 
@@ -75,24 +85,21 @@ body.scrolled {
 
 .form {
   h1 {
-    font-size: 40px;
-    padding-bottom: 40px;
+    font-size: 30px;
   }
   img {
     width: 30px;
   }
   input {
-    font-size: 23px;
+    font-size: 18px;
     background: transparent;
     border: 0;
     text-align: center;
+    max-width: 80%;
   }
   input:focus, select:focus, textarea:focus {
     outline: 0;
 
-  }
-  button {
-    margin-top: 20px;
   }
   label {
     display: block;
@@ -114,6 +121,18 @@ body.scrolled {
   }
 }
 
+.trades {
+
+  li {
+    font-size: 20px;
+  }
+  p , a{
+    font-size: 16px;
+  }
+  
+
+}
+
 .validation {
   color: rgb(176, 55, 34);
 }
@@ -122,5 +141,8 @@ body.scrolled {
   img {
     width: 100%;
     border-radius: 10px;
+  }
+  .bottons {
+    margin-bottom: 15px;
   }
 }

@@ -15,13 +15,14 @@ router.get('/:userId', (req, res, next) => {
     .then((user) => {
       Service.find({ owner: ObjectId(userId) })
         .then((services) => {
-          const ownerId = ObjectId(services[0].owner._id).toString();
-          if (req.session.currentUser._id === ownerId) {
-            services.isMyProfile = true;
+          let isMyProfile = false;
+          if (req.session.currentUser._id === userId) {
+            isMyProfile = true;
           }
           const data = {
             user,
-            services
+            services,
+            isMyProfile
           };
           res.render('profile', data);
         });

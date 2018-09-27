@@ -1,4 +1,6 @@
+'use strics';
 const body = document.getElementsByTagName('body')[0];
+
 window.onscroll = function () {
   var currentScrollPos = window.pageYOffset;
   if (currentScrollPos > 35) {
