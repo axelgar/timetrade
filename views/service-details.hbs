@@ -9,7 +9,7 @@
   <p class="service-description">{{service.description}}</p>
   </div>
   {{#unless currentUser}}
-  <p>Log-in to book service</p>
+   <a href="/auth/login"><p>Log-in to book service</p></a>
   {{/unless}}
   {{#if message}}
         <p class="validation">{{message}}</p>

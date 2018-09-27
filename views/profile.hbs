@@ -1,15 +1,12 @@
 <section class="profile">
   <img src="{{user.url}}" alt="{{user.username}}">
-  <h2>{{user.username}}</h2>
-  {{#if isMyProfile}}
-  <h4>Time left {{user.coins}} mins</h4>
-  {{/if}}
+  <h3>{{user.username}}</h3>
   {{#if isMyProfile}}
     <div class="bottons">
       <a href="/services/create" class="button">Add service</a>
     </div>
   {{/if}}
-  <h3>My trades</h3>
+  <h2>My trades</h2>
   <ul class="services">
     {{#each services}}
         <div class="card-container">
@@ -18,7 +15,7 @@
               <img src="{{this.url}}" alt="{{this.name}}">
             </a>
             <h3 class="name">{{this.name}}</h3>
-            <p class="time">{{this.time}}</p>
+             <img src="../images/hourglass.png" class="cost-icon"><p class="time">{{this.time}}</p>
             {{#if ../this.isMyProfile}}
               <form action="/services/{{this.id}}/delete" method="post">
                 <div class="field submit">
