@@ -1,27 +1,27 @@
 <section class="profile">
   <img src="{{user.url}}" alt="{{user.username}}">
   <h2>{{user.username}}</h2>
-  {{#if services.isMyProfile}}
+  {{#if isMyProfile}}
   <h4>Time left {{user.coins}} mins</h4>
   {{/if}}
   <h3>My trades</h3>
-  {{#if services.isMyProfile}}
+  {{#if isMyProfile}}
     <div class="bottons">
       <a href="/services/create" class="button">Add service</a>
     </div>
   {{/if}}
   <ul class="services">
     {{#each services}}
-      <a href="/services/{{this.id}}"></a>
-      {{#if this.isMyProfile}}
-        <form action="/trades/{{this.id}}/reject" method="post" >
-          <div class="field submit">
-            <a class="button">Delete</a>
-          </div>
-        </form>
-      {{/if}}
-        <div class="card-container" >
+        <a href="/services/{{this.id}}"></a>
+        <div class="card-container">
           <li class="card">
+            {{#if ../this.isMyProfile}}
+              <form action="/services/{{this.id}}/delete" method="post">
+                <div class="field submit">
+                  <button class="button">Delete</button>
+                </div>
+              </form>
+            {{/if}}
             <img src="{{this.url}}" alt="{{this.name}}">
             <h3 class="name">{{this.name}}</h3>
             <p class="category">{{this.category}}</p>
