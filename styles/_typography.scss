@@ -21,7 +21,11 @@ p {
 
 .card-container{
   p, a{
-  text-shadow: 1px 1px 3px black;
+    text-shadow: 1px 1px 3px black;
+    
+  }
+  .category {
+    font-size: 15px;
   }
 }
 
