@@ -103,11 +103,18 @@ router.post('/:tradeId/reject', (req, res, next) => {
         .populate('service')
         .then((result) => {
           const time = result.service.time;
-          return User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } }, { new: true })
-            .then((user) => {
-              req.session.currentUser = user;
-              res.redirect('/services');
-            });
+          if (req.session.currentUser._id === result.service.owner) {
+            User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } }, { new: true })
+              .then(() => {
+                res.redirect('/services');
+              });
+          } else {
+            User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } }, { new: true })
+              .then((user) => {
+                req.session.currentUser = user;
+                res.redirect('/services');
+              });
+          }
         });
     })
     .catch(next);
