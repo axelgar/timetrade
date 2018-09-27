@@ -11,3 +11,14 @@ window.onscroll = function () {
     document.querySelector('.time').src = '/images/hourglass.png';
   }
 };
+
+const checkbox = document.querySelector('.menu-checkbox');
+
+document.body.addEventListener('click', () => {
+  if (checkbox.checked === false) {
+    checkbox.checked = true;
+  } else {
+    checkbox.checked = false;
+  }
+  checkbox.addEventListener('click', event => event.stopPropagation(event));
+});
