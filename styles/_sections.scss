@@ -24,7 +24,7 @@
   }
   .card {
     img {
-      width: 50%;
+      width: 100%;
       border-radius: 60%;
     }
   }
@@ -52,8 +52,14 @@
 
 .services {
   img {
-    width: 100%;
+
     border-radius: 10px;
+  
+  }
+  li {
+    margin-bottom: 50px;
+   position: relative;
+
   }
 }
 

@@ -17,17 +17,15 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin: 0px auto 20px auto;
   border-radius: 10px;
-  width: 85%;
+  width: 100%;
   text-align: center;
   padding-bottom: 20px;
-  p{
-    text-align: justify;
-    margin: 0 10px;
-    padding-bottom: 10px;
-    text-align: center;
-  }
-  .username, .category, .time{
-    padding-bottom: 10px;
+
+  .name,.category,.owner{
+    margin-bottom: 5px;
+    text-align: left;
+    margin-left: 10px;
+
   }
 }
 
