@@ -18,10 +18,11 @@ body {
   left: 0;
   right: 0;
   top: 0;
-  height: 80px;
+  height: 65px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   .nav-item {
     width: 80px;
     text-align: center;
@@ -31,10 +32,16 @@ body {
 #nav-bg {
   position: fixed;
   width: 100%;
-  top: 0;
-  height: 80px;
+  top: -60px;
+  height: 60px;
   background-color: white;
   transition: top 0.3s;
+  opacity: 0.95;
+}
+body.scrolled {
+  #nav-bg{
+    top: 0;
+  }
 }
 
 #site-footer {

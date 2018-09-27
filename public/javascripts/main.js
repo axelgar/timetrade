@@ -1,11 +1,11 @@
-var prevScrollpos = window.pageYOffset;
+const body = document.getElementsByTagName('body')[0];
 window.onscroll = function () {
   var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos < currentScrollPos) {
-    document.querySelector('#nav-bg').style.top = '-1px';
+  if (currentScrollPos > 35) {
+    body.classList.add('scrolled');
+    document.querySelector('.time').src = '/images/hourglass2.png';
   } else {
-    document.querySelector('#nav-bg').style.top = '-80px';
+    body.classList.remove('scrolled');
+    document.querySelector('.time').src = '/images/hourglass.png';
   }
-  prevScrollpos = currentScrollPos;
-}
-;
+};
