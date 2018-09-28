@@ -40,10 +40,10 @@ router.post('/signup', uploadCloud.single('photo'), (req, res, next) => {
       const hashedPassword = bcrypt.hashSync(password, salt);
       const user = new User({ username, password: hashedPassword, url, contact });
       return user.save()
-        .then(() => {
-          req.session.currentUser = user;
-          res.redirect('/services');
-        });
+    })
+    .then(() => {
+      req.session.currentUser = user;
+      return res.redirect('/services');
     })
     .catch(next);
 });
@@ -72,21 +72,21 @@ router.post('/login', (req, res, next) => {
     req.flash('login-form-error', 'Username and password are mandatory');
     return res.redirect('/auth/login');
   }
-  User.findOne({ username })
-    .then(result => {
-      if (!result) {
-        req.flash('usernamelogin-form-error', 'Incorrect password or username');
-        req.flash('login-form-data', { username });
-        return res.redirect('/auth/login');
-      }
-      if (!bcrypt.compareSync(password, result.password)) {
-        req.flash('usernamelogin-form-error', 'Incorrect pasword or username');
-        return res.redirect('/auth/login');
-      }
-      req.session.currentUser = result;
-      res.redirect('/services');
-    })
-    .catch(next);
+  return User.findOne({ username })
+  .then(result => {
+    if (!result) {
+      req.flash('usernamelogin-form-error', 'Incorrect password or username');
+      req.flash('login-form-data', { username });
+      return res.redirect('/auth/login');
+    }
+    if (!bcrypt.compareSync(password, result.password)) {
+      req.flash('usernamelogin-form-error', 'Incorrect pasword or username');
+      return res.redirect('/auth/login');
+    }
+    req.session.currentUser = result;
+    res.redirect('/services');
+  })
+  .catch(next);
 });
 
 router.post('/logout', (req, res, next) => {

@@ -1,4 +1,5 @@
 'use strict';
+
 const body = document.getElementsByTagName('body')[0];
 
 window.onscroll = function () {

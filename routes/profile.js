@@ -7,25 +7,26 @@ const Service = require('../models/service');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/:userId', (req, res, next) => {
-  const userId = req.params.userId;
   if (!req.session.currentUser) {
     return res.redirect('/');
   }
+  const userId = req.params.userId;
+  
   User.findById(userId)
     .then((user) => {
-      Service.find({ owner: ObjectId(userId) })
-        .then((services) => {
-          let isMyProfile = false;
-          if (req.session.currentUser._id === userId) {
-            isMyProfile = true;
-          }
-          const data = {
-            user,
-            services,
-            isMyProfile
-          };
-          res.render('profile', data);
-        });
+      return Service.find({ owner: ObjectId(userId) })
+      .then((services) => {
+        let isMyProfile = false;
+        if (req.session.currentUser._id === userId) {
+          isMyProfile = true;
+        }
+        const data = {
+          user,
+          services,
+          isMyProfile
+        };
+        res.render('profile', data);
+      });
     })
     .catch(next);
 });
