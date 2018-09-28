@@ -11,7 +11,7 @@
             <li class="card">
               <h3 class="name">{{this.service.name}}</h3>
                <img src="../images/hourglass.png" class="cost-icon" alt="time"><p class="time">{{this.service.time}}</p>
-              <p class="owner">Provider: {{this.consumer.username}}</p>
+              <p class="owner">Consumer: {{this.consumer.username}}</p>
               <a href="https://api.whatsapp.com/send?phone={{this.consumer.contact}}"><img src="/images/message-closed-envelope.png" class="message" alt="message-icon">Contact the consumer</a>
               <p class="state">State: {{this.providerState}}</p>
             </li>
