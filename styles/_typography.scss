@@ -1,6 +1,6 @@
 body {
   color: rgb(255, 255, 255);
-  font-size: 16px;
+  font-size: 18px;
   line-height: 147%;
   font-family: 'Varela Round', sans-serif;
 }
@@ -19,13 +19,37 @@ p {
   margin: auto;
 }
 
-.card-container{
+#services-list {
   p, a{
     text-shadow: 1px 1px 3px black;
-    
+
   }
+  .owner{
+    text-shadow: 1px 1px 3px black;
+  }
+
+}
+.card-container{
   .category {
     font-size: 15px;
+  }
+  .service-description {
+    font-size: 18px;
+    padding: 10px;
+  }
+}
+#services-details {
+  .li{
+    font-size: 18px;
+  }
+  .h3{
+    font-size: 22px;
+  }
+}
+.trades  {
+  .card {
+    font-size: 18px;
+    padding: 10px;
   }
 }
 

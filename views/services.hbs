@@ -1,4 +1,4 @@
-<section class="services">
+<section id="services-list" class="services">
   <h2>Services</h2>
   <ul>
     {{#each services}}
@@ -7,12 +7,8 @@
         <li>
          {{!-- <img src="{{this.url}}" alt="{{this.name}}"> --}}
           <p class="name">{{this.name}}</p>
-          <p class="category">{{this.category}}</p>
-          <img src="../images/hourglass.png" class="cost-icon" alt="time"><p class="time">{{this.time}}</p>
-          
-          {{#each this.owner}}
-            <ul class="owner">{{this.username}}</ul>
-          {{/each}}
+          <img src="../images/hourglass.png" class="cost-icon" alt="time"><p class="cost-time">{{this.time}}</p>
+          <ul class="owner">{{this.owner.username}}</ul>
         </li>
       </div>
     </a>

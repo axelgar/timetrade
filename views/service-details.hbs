@@ -1,16 +1,15 @@
-<section class="section services">
+<section id="service-details" class="section services">
   <div class="card-container">
   <div class="image">
     <img src="{{service.url}}" alt="{{service.name}}">
   </div>
   <h2><span class="name">{{service.name}}</span></h2>
+   <img src="../images/hourglass.png" class="cost-icon" alt="time"><p class="time">{{service.time}}</p>
   <a href="/profile/{{service.owner._id}}" class="username">Owner: {{service.owner.username}}</a>
-  <p>{{service.description}}</p>
-  <p class="category">{{service.category}}</p>
-  <p class="time">{{service.time}}</p>
+  <p class="service-description">{{service.description}}</p>
   </div>
   {{#unless currentUser}}
-  <p>Log-in to book service</p>
+   <a href="/auth/login"><p>Log-in to book service</p></a>
   {{/unless}}
   {{#if message}}
         <p class="validation">{{message}}</p>

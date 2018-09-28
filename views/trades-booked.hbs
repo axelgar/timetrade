@@ -1,5 +1,5 @@
 <section class="trades">
-  <h2>Booked trades</h2>
+  <h2>My bookings</h2>
   <ul>
     {{#each trades}}
       {{#unless this.isRejected}}
@@ -10,10 +10,9 @@
             </div>
             <li class="card">
               <h3 class="name">{{this.service.name}}</h3>
+              <img src="../images/hourglass.png" class="cost-icon" alt="time"><p class="time">{{this.service.time}}</p>
               <p class="owner">Provider: {{this.owner.username}}</p>
               <a href="https://api.whatsapp.com/send?phone={{this.owner.contact}}">Send a message to the provider</a>
-              <p class="category">{{this.service.category}}</p>
-              <p class="time">{{this.service.time}}</p>
               <p class="state">{{this.consumerState}}</p>
             </li>
           {{#if message}}
