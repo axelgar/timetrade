@@ -25,12 +25,16 @@
   .buttons {
     display: flex;
     justify-content: space-around;
+    margin: 30px 0;
   }
   .card {
     img {
       width: 100%;
       border-radius: 60%;
     }
+  }
+  .logo-index {
+    padding: 20px 0;
   }
 }
 /* nav-bar*/
@@ -80,7 +84,8 @@ body.scrolled {
     justify-content: left;
     li {
       text-align: center;
-      font-size: 12px;
+      font-size: 18px;
+      font-weight: bold;
       flex: 1;
     }
   }
