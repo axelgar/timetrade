@@ -22,6 +22,7 @@ router.get('/create', (req, res, next) => {
   if (!req.session.currentUser) {
     return res.redirect('/');
   }
+
   const formData = req.flash('service-form-data');
   const formErrors = req.flash('service-form-error');
   const data = {
@@ -35,6 +36,7 @@ router.post('/create', uploadCloud.single('photo'), (req, res, next) => {
   if (!req.session.currentUser) {
     return res.redirect('/');
   }
+
   const { name, description, category, time } = req.body;
   if (!req.file || !name || !description || !category || !time) {
     req.flash('service-form-error', 'all fields are mandatory');
@@ -48,14 +50,15 @@ router.post('/create', uploadCloud.single('photo'), (req, res, next) => {
     .then(() => {
       res.redirect('/services');
     })
-    .catch(next);
+  .catch(next);
 });
 
 router.get('/:serviceId', (req, res, next) => {
   const id = req.params.serviceId;
   if (!ObjectId.isValid(id)) {
-    next();
+    return next();
   }
+
   Service.findById(id)
     .populate('owner')
     .then((results) => {
@@ -65,20 +68,24 @@ router.get('/:serviceId', (req, res, next) => {
         service: results,
         message: coinsError[0]
       };
-      res.render('service-details', data);
+      return res.render('service-details', data);
     })
     .catch(next);
 });
 
 router.post('/:serviceId/delete', (req, res, next) => {
-  const id = req.params.serviceId;
-  const idu = req.session.currentUser._id;
-  if (!ObjectId.isValid(id)) {
-    return res.redirect('/services');
+  if (!req.session.currentUser) {
+    return res.redirect('/');
   }
+  const id = req.params.serviceId;
+  if (!ObjectId.isValid(id)) {
+    return next();
+  }
+  
+  const idu = req.session.currentUser._id;
   Service.remove({ _id: id })
     .then(() => {
-      res.redirect('/profile/' + idu);
+      return res.redirect('/profile/' + idu);
     })
     .catch(next);
 });
