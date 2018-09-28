@@ -1,4 +1,5 @@
 'use strict';
+
 const body = document.getElementsByTagName('body')[0];
 const checkbox = document.querySelector('.menu-checkbox');
 const main  = document.getElementById('site-main');
