@@ -12,8 +12,8 @@
               <h3 class="name">{{this.service.name}}</h3>
               <img src="../images/hourglass.png" class="cost-icon" alt="time"><p class="time">{{this.service.time}}</p>
               <p class="owner">Provider: {{this.owner.username}}</p>
-              <a href="https://api.whatsapp.com/send?phone={{this.owner.contact}}">Send a message to the provider</a>
-              <p class="state">{{this.consumerState}}</p>
+              <a href="https://api.whatsapp.com/send?phone={{this.owner.contact}}"><img src="/images/message-closed-envelope.png" class="message" alt="message-icon">Contact the provider</a>
+              <p class="state">State: {{this.consumerState}}</p>
             </li>
           {{#if message}}
             <p class="validation">{{message}}</p>
@@ -21,13 +21,13 @@
           {{#if this.isAccepted}}
           <form action="/trades/{{this.id}}/confirm" method="post" >
             <div class="field submit">
-              <button class="button">Confirm</button>
+              <button class="button confirm">Confirm</button>
             </div>
           </form>
           {{/if}}
           <form action="/trades/{{this.id}}/reject" method="post" >
             <div class="field submit">
-              <button class="button">Reject</button>
+              <button class="button reject">Reject</button>
             </div>
           </form>
           </div>

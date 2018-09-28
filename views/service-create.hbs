@@ -4,7 +4,7 @@
 <div class="card-container">
   <div class="field" >
     <label>Name</label>
-    <input type="text" name="name" value="{{fields.name}}"/ placeholder="Name of the service">
+    <input type="text" name="name" value="{{fields.name}}"/ placeholder="Name of the service" class="placeholder">
   </div>
 
   <div class="field" >
@@ -14,34 +14,38 @@
   <div class="field" >
     <label>Category</label>
     <select name="category">
-      <option value="">--Please choose an option--</option>
-      <option value="languages" value="{{fields.category}}">Languages</option>
-      <option value="technology" value="{{fields.category}}">Technology</option>
-      <option value="arts" value="{{fields.category}}">Arts</option>
-      <option value="social" value="{{fields.category}}">Social</option>
-      <option value="sports" value="{{fields.category}}">Sports</option>
+      <optgroup>
+        <option value="">--Please choose an option--</option>
+        <option value="languages" class="option" value="{{fields.category}}">Languages</option>
+        <option value="technology" class="option" value="{{fields.category}}">Technology</option>
+        <option value="arts"  class="option" value="{{fields.category}}">Arts</option>
+        <option value="social"  class="option" value="{{fields.category}}">Social</option>
+        <option value="sports"  class="option" value="{{fields.category}}">Sports</option>
+      </optgroup>
     </select>
   </div>
   <div class="field" >
     <label>Time</label>
      <select name="time">
-      <option value="">--Please choose an option--</option>
-      <option value="60" value="{{fields.time}}">60'</option>
-      <option value="45" value="{{fields.time}}">45'</option>
-      <option value="30" value="{{fields.time}}">30'</option>
-      <option value="15" value="{{fields.time}}">15'</option>
+      <optgroup>
+        <option value="">--Please choose an option--</option>
+        <option value="60" value="{{fields.time}}">60'</option>
+        <option value="45" value="{{fields.time}}">45'</option>
+        <option value="30" value="{{fields.time}}">30'</option>
+        <option value="15" value="{{fields.time}}">15'</option>
+      </optgroup>
     </select>
   </div>
   <div class="field">
     <label>Service image</label>
-    <input type="file" name="photo">
+    <input type="file" name="photo" class="button-photo">
   </div>
   {{#if message}}
     <p class="validation">{{message}}</p>
   {{/if}}
 </div>
 <div class="field submit">
-  <button type="submit" class="button">Add</button>
+  <button type="submit" class="button add">Add</button>
 </div>
 </form>
 </section>

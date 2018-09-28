@@ -1,4 +1,4 @@
-<section class="form">
+<section id="signup" class="form">
   <h1>Join us!</h1>
   <form method="POST" action="/auth/signup" enctype="multipart/form-data">
     <div class="field" >
@@ -20,7 +20,7 @@
       </div>
       <div>
         <label>Profile picture</label>
-        <input type="file" name="photo">
+        <input type="file" name="photo" class="button-photo">
       </div>
     </div>
       {{#if message1}}
