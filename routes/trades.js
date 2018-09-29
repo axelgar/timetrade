@@ -160,7 +160,7 @@ router.post('/:serviceId/:ownerId/create', (req, res, next) => {
   User.findById(userId)
     .then((result) => {
       if (result.id === ido) {
-        req.flash('coins-book-error', 'Your are the provider of this service');
+        req.flash('coins-book-error', 'You are the provider of this service');
         return res.redirect('/services/' + id);
       }
       const coins = result.coins;

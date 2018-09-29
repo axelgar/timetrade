@@ -5,8 +5,73 @@ body {
   font-family: 'Varela Round', sans-serif;
 }
 
-.index h1 {
+#menu {
+  p {
+    color: rgb(224, 56, 240);
+    font-size: 25px;
+  }
+  li {
+    font-size: 25px;
+    color: rgb(76, 180, 240);
+  }
+}
+
+#login {
+  h1{
+  margin: 20px;
+  }
+  label {
+  padding: 15px 10px;
+  }
+  .submit {
+  margin-top: 50px;
+  }
+}
+
+.services-create {
+  h4 {
+    text-align: left;
+  }
+  ::placeholder {
+    color: black;
+    font-size: 20px;
+    opacity: 1; 
+  }
+
+  :-ms-input-placeholder { 
+      color: black;
+      font-size: 20px;
+  }
+
+  ::-ms-input-placeholder {
+      color: black;
+      font-size: 20px;
+  }
+}
+
+.index { 
+  h1 {
   font-size: 50px;
+  }
+  h2 {
+  font-size: 35px;
+  }
+  p{
+  font-size: 22px;
+  }
+}
+
+.profile {
+  h3{
+  font-size: 25px;
+  }
+  h2 {
+  font-size: 30px;
+  }
+  .delete {
+    font-weight: bold;
+    font-size: 22px;
+  }
 }
 
 h4 {
@@ -19,22 +84,27 @@ p {
   margin: auto;
 }
 
+
 #services-list {
   p, a{
-    text-shadow: 1px 1px 3px black;
+   text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
 
   }
   .owner{
-    text-shadow: 1px 1px 3px black;
+    text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+    font-weight: bold;
   }
 
 }
 .card-container{
+  .username {
+    font-size: 22px;
+  }
   .category {
     font-size: 15px;
   }
   .service-description {
-    font-size: 18px;
+    font-size: 22px;
     padding: 10px;
   }
 }
@@ -66,6 +136,10 @@ select{
   font-size: 18px;
   text-align: center
 }
+optgroup {
+  font-size: 16px;
+}
+
 
 textarea {
   font-family: 'Varela Round', sans-serif;

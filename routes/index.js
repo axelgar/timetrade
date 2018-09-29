@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
   if (req.session.currentUser) {
@@ -11,13 +12,18 @@ router.get('/', (req, res, next) => {
       .then((results) => {
         const data = {
           user: results,
-          title: 'TimeTrade'
+          title: 'TimeTrade',
+          home: true
         };
         res.render('index', data);
       })
       .catch(next);
   } else {
-    res.render('index', { title: 'TimeTrade' });
+    const data = {
+      title: 'TimeTrade',
+      home: true
+    };
+    res.render('index', data);
   }
 });
 

@@ -1,8 +1,5 @@
 <section class="trades">
-  <h2>My requests</h2>
-  {{!-- {{#unless trades}}
-  <p>Yo don't have any request for a service, create more <a href="/services/">here!</a></p>
-  {{/unless}} --}}
+  <h2>My Requests</h2>
   <ul>
     {{#each trades}}
       {{#unless this.isRejected}}
@@ -13,29 +10,28 @@
             </div>
             <li class="card">
               <h3 class="name">{{this.service.name}}</h3>
-              <p class="owner">{{this.consumer.username}}</p>
-              <a href="https://api.whatsapp.com/send?phone={{this.consumer.contact}}">Send a message to the consumer</a>
-              <p class="category">{{this.service.category}}</p>
                <img src="../images/hourglass.png" class="cost-icon" alt="time"><p class="time">{{this.service.time}}</p>
-              <p class="state">{{this.providerState}}</p>
+              <p class="owner">Consumer: {{this.consumer.username}}</p>
+              <a href="https://api.whatsapp.com/send?phone={{this.consumer.contact}}"><img src="/images/message-closed-envelope.png" class="message" alt="message-icon">Contact the consumer</a>
+              <p class="state">State: {{this.providerState}}</p>
             </li>
           {{#unless this.isAccepted}}
             <form action="/trades/{{this.id}}/accept" method="post" >
               <div class="field submit">
-                <button class="button">Accept</button>
+                <button class="button accept">Accept</button>
               </div>
             </form>
           {{/unless}}
           {{#if this.isAccepted}}
             <form action="/trades/{{this.id}}/confirm" method="post" >
               <div class="field submit">
-                <button class="button">Confirm</button>
+                <button class="button confirm">Confirm</button>
               </div>
             </form>
           {{/if}}
             <form action="/trades/{{this.id}}/reject" method="post" >
               <div class="field submit">
-                <button class="button">Reject</button>
+                <button class="button reject">Reject</button>
               </div>
             </form>
           </div>
