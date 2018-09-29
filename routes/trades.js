@@ -17,22 +17,9 @@ router.get('/booked', (req, res, next) => {
     .populate('service')
     .populate('owner')
     .then((results) => {
-      // @todo review add virtuals
-      results.forEach(trade => {
-        if (trade.consumerState === 'accepted' || trade.consumerState === 'confirmed') {
-          trade.isAccepted = true;
-        }
-        // @todo review
-        if (trade.consumerState === 'rejected') {
-          trade.isRejected = true;
-        }
-        // @todo review
-        if (trade.consumerState === 'confirmed' && trade.providerState === 'confirmed') {
-          trade.isConfirmed = true;
-        }
-      });
       const data = {
-        trades: results
+        trades: results,
+        trade: true
       };
       res.render('trades-booked', data);
     })
@@ -49,18 +36,6 @@ router.get('/requested', (req, res, next) => {
     .populate('service')
     .populate('owner')
     .then((results) => {
-      // @todo review add virtuals
-      results.forEach(trade => {
-        if (trade.providerState === 'accepted' || trade.providerState === 'confirmed') {
-          trade.isAccepted = true;
-        }
-        if (trade.consumerState === 'rejected' ) {
-          trade.isRejected = true;
-        }
-        if (trade.consumerState === 'confirmed' && trade.providerState === 'confirmed') {
-          trade.isConfirmed = true;
-        }
-      });
       const data = {
         trades: results
       };
@@ -101,27 +76,24 @@ router.post('/:tradeId/reject', (req, res, next) => {
     return next();
   }
 
-  Trade.findById(tradeId)
-    .then(() => {
-      return Trade.findByIdAndUpdate(tradeId, { '$set': { 'providerState': 'rejected', 'consumerState': 'rejected' } })
-      .populate('service')
-      .then((result) => {
-        const time = result.service.time;
-        if (result.service.owner.equals(req.session.currentUser._id)) {
-          return User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } }, { new: true })
-          .then(() => {
-            return res.redirect('/services');
-          });
-        } else {
-          return User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } }, { new: true })
-          .then((user) => {
-            req.session.currentUser = user;
-            return res.redirect('/services');
-          });
-        }
-      })
+  Trade.findByIdAndUpdate(tradeId, { '$set': { 'providerState': 'rejected', 'consumerState': 'rejected' } })
+    .populate('service')
+    .then((result) => {
+      const time = result.service.time;
+      if (result.service.owner.equals(req.session.currentUser._id)) {
+        return User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } }, { new: true })
+        .then(() => {
+          return res.redirect('/services');
+        });
+      } else {
+        return User.findByIdAndUpdate(result.consumer._id, { $inc: { coins: time } }, { new: true })
+        .then((user) => {
+          req.session.currentUser = user;
+          return res.redirect('/services');
+        });
+      }
     })
-    .catch(next);
+  .catch(next);
 });
 
 router.post('/:tradeId/confirm', (req, res, next) => {
@@ -132,47 +104,46 @@ router.post('/:tradeId/confirm', (req, res, next) => {
   if (!ObjectId.isValid(tradeId)) {
     return next();
   };
+
   Trade.findById(tradeId)
     .then((result) => {
       if (result.providerState === 'booked') {
-        return res.redirect('/trades/request');
+        return res.redirect('/trades/requested');
       }
       if (result.owner.equals(req.session.currentUser._id)) {
-        return Trade.findByIdAndUpdate(tradeId, { providerState: 'confirmed' }, { new: true })
+        Trade.findByIdAndUpdate(tradeId, { providerState: 'confirmed' }, { new: true })
           .populate('service')
           .then((result) => {
             const providerId = result.owner;
             const time = Number(result.service.time);
             if (result.consumerState === 'confirmed' && result.providerState === 'confirmed') {
-              return User.findOneAndUpdate({ _id: ObjectId(providerId) }, { $inc: { coins: time } }, { new: true })
-                .then((user) => {
-                  req.session.currentUser = user;
-                  return res.redirect('/trades/requested');
-                });
+              User.findOneAndUpdate({ _id: ObjectId(providerId) }, { $inc: { coins: time } }, { new: true })
+              .then((user) => {
+                req.session.currentUser = user;
+                return res.redirect('/trades/requested');
+              })
             } else {
               return res.redirect('/trades/requested');
             }
-          });
+          })
       } else if (result.consumer.equals(req.session.currentUser._id)) {
-        return Trade.findByIdAndUpdate(tradeId, { consumerState: 'confirmed' }, { new: true })
+        Trade.findByIdAndUpdate(tradeId, { consumerState: 'confirmed' }, { new: true })
           .populate('service')
           .then((result) => {
             const providerId = result.owner;
             const time = Number(result.service.time);
             if (result.consumerState === 'confirmed' && result.providerState === 'confirmed') {
-              return User.findOneAndUpdate({ '_id': ObjectId(providerId) }, { $inc: { coins: time } })
-                .then(() => {
-                  return res.redirect('/trades/booked');
-                });
+              User.findOneAndUpdate({ '_id': ObjectId(providerId) }, { $inc: { coins: time } })
+              .then(() => {
+                return res.redirect('/trades/booked');
+              });
             } else {
               return res.redirect('/trades/booked');
             }
-          });
-      } else {
-        return next('something went wrong');
+          })
       }
     })
-    .catch(next);
+  .catch(next);
 });
 
 router.post('/:serviceId/:ownerId/create', (req, res, next) => {
@@ -183,6 +154,7 @@ router.post('/:serviceId/:ownerId/create', (req, res, next) => {
   if (!ObjectId.isValid(id)) {
     return next();
   };
+
   const ido = req.params.ownerId;
   const userId = req.session.currentUser._id;
   User.findById(userId)
@@ -199,19 +171,19 @@ router.post('/:serviceId/:ownerId/create', (req, res, next) => {
             req.flash('coins-book-error', 'We are sorry but you do not have enough time');
             return res.redirect('/services/' + id);
           }
-          return User.findByIdAndUpdate({ '_id': ObjectId(userId) }, { $inc: { coins: -time } }, { new: true })
-            .then((user) => {
-              const owner = ido;
-              const service = id;
-              const consumer = req.session.currentUser;
-              const trade = new Trade({ consumer, service, owner });
-              req.session.currentUser = user;
-              return trade.save()
-                .then(() => {
-                  res.redirect('/trades/booked');
-                });
-            });
-        });
+          return User.findByIdAndUpdate({ '_id': ObjectId(userId) }, { $inc: { coins: -time } }, { new: true });
+        })
+        .then((user) => {
+          const owner = ido;
+          const service = id;
+          const consumer = req.session.currentUser;
+          const trade = new Trade({ consumer, service, owner });
+          req.session.currentUser = user;
+          return trade.save();
+        })
+        .then(() => {
+          res.redirect('/trades/booked');
+        })
     })
     .catch(next);
 });

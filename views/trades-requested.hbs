@@ -1,5 +1,8 @@
 <section class="trades">
   <h2>My requests</h2>
+  {{!-- {{#unless trades}}
+  <p>Yo don't have any request for a service, create more <a href="/services/">here!</a></p>
+  {{/unless}} --}}
   <ul>
     {{#each trades}}
       {{#unless this.isRejected}}

@@ -29,6 +29,19 @@ const tradeSchema = new Schema({
   }
 });
 
+
+tradeSchema.virtual('isAccepted').get(function () {
+  return this.consumerState === 'accepted' || this.providerState === 'accepted';
+});
+
+tradeSchema.virtual('isRejected').get(function () {
+  return this.consumerState === 'rejected';
+});
+
+tradeSchema.virtual('isConfirmed').get(function () {
+  return this.consumerState === 'confirmed' && this.providerState === 'confirmed';
+});
+
 const Trade = mongoose.model('Trade', tradeSchema);
 
 module.exports = Trade;
